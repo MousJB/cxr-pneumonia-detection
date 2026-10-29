@@ -1,0 +1,37 @@
+{
+  "competition": "rsna-pneumonia-detection-challenge",
+  "train_dicom_files": 26684,
+  "test_dicom_files": 3000,
+  "label_rows": 30227,
+  "labelled_images": 26684,
+  "positive_images": 6012,
+  "negative_images": 20672,
+  "boxes": 9555,
+  "boxes_per_positive_image": {
+    "1": 2614,
+    "2": 3266,
+    "3": 119,
+    "4": 13
+  },
+  "detailed_class_counts": {
+    "Lung Opacity": 6012,
+    "No Lung Opacity / Not Normal": 11821,
+    "Normal": 8851
+  },
+  "problems": {
+    "label_ids_without_dicom": 0,
+    "dicom_without_label": 0,
+    "class_info_ids_not_in_labels": 0,
+    "class_info_conflicting_ids": 0,
+    "positive_but_class_not_lung_opacity": 0,
+    "lung_opacity_but_negative": 0,
+    "train_test_overlap": 0
+  },
+  "archive_check": {
+    "archive": "rsna-pneumonia-detection-challenge.zip",
+    "archive_bytes": 3932287530,
+    "archive_sha256": "133acacf95aa68c4d219124b17937f31cec073052096b9f9b122180df9d9af18",
+    "members_checked": 29688
+  },
+  "manifest_sha256": "9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12af7"
+}

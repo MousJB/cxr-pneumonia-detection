@@ -14,6 +14,10 @@ hashes only, no image content); its own SHA-256 is printed and stored in
 
     python scripts/download_rsna.py            # download (if needed) + checks + manifest
     python scripts/download_rsna.py --no-download   # checks + manifest only
+
+If the archive was downloaded by hand from the Kaggle website and extracted into
+``data/raw``, ``--verify-zip data/rsna-pneumonia-detection-challenge.zip`` also checks every
+extracted file against the size and CRC-32 stored in the archive.
 """
 
 import argparse
@@ -22,6 +26,8 @@ import hashlib
 import json
 import shutil
 import sys
+import zipfile
+import zlib
 from collections import Counter
 from pathlib import Path
 
@@ -50,6 +56,36 @@ def download() -> None:
     RAW.mkdir(parents=True, exist_ok=True)
     path = kagglehub.competition_download(COMPETITION, output_dir=str(RAW))
     print(f"competition files in: {path}")
+
+
+def crc32_file(path: Path) -> int:
+    crc = 0
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            crc = zlib.crc32(chunk, crc)
+    return crc
+
+
+def verify_zip(archive: Path) -> dict:
+    """Checks that data/raw holds exactly the archive members, with the same size and CRC-32."""
+    with zipfile.ZipFile(archive) as z:
+        members = [m for m in z.infolist() if not m.is_dir()]
+    mismatched = []
+    for i, m in enumerate(members, 1):
+        target = RAW / m.filename
+        if not target.is_file() or target.stat().st_size != m.file_size or crc32_file(target) != m.CRC:
+            mismatched.append(m.filename)
+        if i % 5000 == 0:
+            print(f"  checked {i}/{len(members)} archive members", flush=True)
+    extra = sorted(
+        {p.relative_to(RAW).as_posix() for p in RAW.rglob("*") if p.is_file()}
+        - {m.filename for m in members}
+    )
+    if mismatched or extra:
+        sys.exit(f"archive check failed: {len(mismatched)} missing or different "
+                 f"(e.g. {mismatched[:3]}), {len(extra)} extra (e.g. {extra[:3]})")
+    return {"archive": archive.name, "archive_bytes": archive.stat().st_size,
+            "archive_sha256": sha256_file(archive), "members_checked": len(members)}
 
 
 def read_rows(path: Path) -> list[dict[str, str]]:
@@ -134,10 +170,14 @@ def write_manifest() -> str:
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--no-download", action="store_true", help="only check data/raw")
+    parser.add_argument("--verify-zip", type=Path, help="archive downloaded by hand, to check against")
     args = parser.parse_args()
     if not args.no_download:
         download()
+    archive = verify_zip(args.verify_zip) if args.verify_zip else None
     summary = check_volumes()
+    if archive:
+        summary["archive_check"] = archive
     summary["manifest_sha256"] = write_manifest()
     METADATA.mkdir(exist_ok=True)
     (METADATA / "raw_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
