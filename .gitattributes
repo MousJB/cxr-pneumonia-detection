@@ -1,0 +1,2 @@
+# Hashed files: keep the exact bytes on every OS (no CRLF conversion)
+metadata/** -text
