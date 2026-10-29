@@ -1,0 +1,32 @@
+# Working notes (not part of the published repository)
+KICKOFF.md
+
+# Environments
+.venv/
+.venv-*/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Tools
+.pytest_cache/
+.ruff_cache/
+.vscode/
+.idea/
+
+# Data and artefacts: never version images (RSNA rules forbid redistribution) or weights
+data/
+runs/
+*.dcm
+*.png
+*.jpg
+*.pt
+*.pth
+*.ckpt
+*.pkl
+*.zip
+
+# Secrets
+kaggle.json
+.env*

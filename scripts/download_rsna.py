@@ -1,0 +1,148 @@
+"""Downloads the RSNA Pneumonia Detection Challenge files from Kaggle and checks them.
+
+Requires a Kaggle account that has accepted the competition rules, and Kaggle API
+credentials (``~/.kaggle/kaggle.json`` or the ``KAGGLE_USERNAME``/``KAGGLE_KEY``
+environment variables). The rules forbid redistributing the images: everything stays in
+``data/``, which git ignores.
+
+After the download, the script checks the volumes (number of DICOM files, label rows,
+consistency between the label tables and the image folder) and writes a manifest
+(relative path, size, SHA-256 of every file). The manifest is written to
+``data/raw_manifest.csv`` and copied to ``metadata/raw_manifest.csv`` (file names and
+hashes only, no image content); its own SHA-256 is printed and stored in
+``metadata/raw_summary.json``.
+
+    python scripts/download_rsna.py            # download (if needed) + checks + manifest
+    python scripts/download_rsna.py --no-download   # checks + manifest only
+"""
+
+import argparse
+import csv
+import hashlib
+import json
+import shutil
+import sys
+from collections import Counter
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+COMPETITION = "rsna-pneumonia-detection-challenge"
+RAW = ROOT / "data" / "raw"
+METADATA = ROOT / "metadata"
+
+TRAIN_IMAGES = "stage_2_train_images"
+TEST_IMAGES = "stage_2_test_images"
+LABELS = "stage_2_train_labels.csv"
+CLASS_INFO = "stage_2_detailed_class_info.csv"
+
+
+def sha256_file(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        for chunk in iter(lambda: f.read(1 << 20), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def download() -> None:
+    import kagglehub
+
+    RAW.mkdir(parents=True, exist_ok=True)
+    path = kagglehub.competition_download(COMPETITION, output_dir=str(RAW))
+    print(f"competition files in: {path}")
+
+
+def read_rows(path: Path) -> list[dict[str, str]]:
+    with path.open(newline="", encoding="utf-8") as f:
+        return list(csv.DictReader(f))
+
+
+def check_volumes() -> dict:
+    for name in (TRAIN_IMAGES, TEST_IMAGES, LABELS, CLASS_INFO):
+        if not (RAW / name).exists():
+            sys.exit(f"missing in {RAW}: {name}")
+
+    train_ids = {p.stem for p in (RAW / TRAIN_IMAGES).glob("*.dcm")}
+    test_ids = {p.stem for p in (RAW / TEST_IMAGES).glob("*.dcm")}
+    labels = read_rows(RAW / LABELS)
+    class_info = read_rows(RAW / CLASS_INFO)
+
+    label_ids = {r["patientId"] for r in labels}
+    positive_ids = {r["patientId"] for r in labels if r["Target"] == "1"}
+    boxes = [r for r in labels if r["Target"] == "1"]
+    if any(not r["x"] for r in boxes) or any(r["x"] for r in labels if r["Target"] == "0"):
+        sys.exit("inconsistent rows: Target=1 without a box, or Target=0 with a box")
+
+    info_by_id: dict[str, set[str]] = {}
+    for r in class_info:
+        info_by_id.setdefault(r["patientId"], set()).add(r["class"])
+    conflicting = sorted(i for i, classes in info_by_id.items() if len(classes) > 1)
+    image_class = {i: next(iter(c)) for i, c in info_by_id.items() if len(c) == 1}
+
+    problems = {
+        "label_ids_without_dicom": sorted(label_ids - train_ids),
+        "dicom_without_label": sorted(train_ids - label_ids),
+        "class_info_ids_not_in_labels": sorted(set(info_by_id) - label_ids),
+        "class_info_conflicting_ids": conflicting,
+        "positive_but_class_not_lung_opacity": sorted(
+            i for i in positive_ids if image_class.get(i) != "Lung Opacity"
+        ),
+        "lung_opacity_but_negative": sorted(
+            i for i, c in image_class.items() if c == "Lung Opacity" and i not in positive_ids
+        ),
+        "train_test_overlap": sorted(train_ids & test_ids),
+    }
+    summary = {
+        "competition": COMPETITION,
+        "train_dicom_files": len(train_ids),
+        "test_dicom_files": len(test_ids),
+        "label_rows": len(labels),
+        "labelled_images": len(label_ids),
+        "positive_images": len(positive_ids),
+        "negative_images": len(label_ids - positive_ids),
+        "boxes": len(boxes),
+        "boxes_per_positive_image": dict(
+            sorted(Counter(Counter(r["patientId"] for r in boxes).values()).items())
+        ),
+        "detailed_class_counts": dict(sorted(Counter(image_class.values()).items())),
+        "problems": {k: len(v) for k, v in problems.items()},
+    }
+    for name, ids in problems.items():
+        if ids:
+            print(f"WARNING {name}: {len(ids)} (e.g. {ids[:3]})")
+    return summary
+
+
+def write_manifest() -> str:
+    files = sorted(
+        p for p in RAW.rglob("*")
+        if p.is_file() and not p.name.startswith(".") and ".kaggle" not in p.parts
+    )
+    target = RAW.parent / "raw_manifest.csv"
+    with target.open("w", newline="", encoding="utf-8") as f:
+        writer = csv.writer(f, lineterminator="\n")
+        writer.writerow(["path", "bytes", "sha256"])
+        for i, p in enumerate(files, 1):
+            writer.writerow([p.relative_to(RAW).as_posix(), p.stat().st_size, sha256_file(p)])
+            if i % 5000 == 0:
+                print(f"  hashed {i}/{len(files)} files", flush=True)
+    METADATA.mkdir(exist_ok=True)
+    shutil.copyfile(target, METADATA / "raw_manifest.csv")
+    return sha256_file(target)
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    parser.add_argument("--no-download", action="store_true", help="only check data/raw")
+    args = parser.parse_args()
+    if not args.no_download:
+        download()
+    summary = check_volumes()
+    summary["manifest_sha256"] = write_manifest()
+    METADATA.mkdir(exist_ok=True)
+    (METADATA / "raw_summary.json").write_text(json.dumps(summary, indent=2) + "\n", encoding="utf-8")
+    print(json.dumps(summary, indent=2))
+
+
+if __name__ == "__main__":
+    main()

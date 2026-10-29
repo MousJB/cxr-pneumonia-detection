@@ -1,0 +1,18 @@
+# Pinned environment used for every result in this repository (Windows 10, Python 3.12.6,
+# NVIDIA GTX 1650 4 GB, CUDA 12.6 wheels).
+#
+#   python -m venv .venv
+#   .venv\Scripts\python -m pip install -r requirements.txt
+#
+--extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.14.1+cu126
+torchvision==0.29.1+cu126
+pydicom==3.0.2
+numpy==2.5.4
+pillow==13.0.0
+scipy==1.18.1
+kagglehub==1.0.3
+kagglesdk==0.1.38
+tqdm==4.70.1
+# MedVision QA (evaluation tool, same author), pinned to a commit
+medvision-qa @ git+https://github.com/MousJB/medvision-qa@97e83b3d5deb9a1d3533ee23996ca981ea1eb41c
