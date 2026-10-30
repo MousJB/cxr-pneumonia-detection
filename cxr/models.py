@@ -16,10 +16,11 @@ ARCHITECTURES = {
 }
 
 
-def build_model(architecture: str, size: int = SIZE, pretrained: bool = True):
+def build_model(architecture: str, size: int = SIZE, pretrained: bool = True, **kwargs):
+    """``kwargs`` go to the torchvision builder (e.g. ``trainable_backbone_layers``)."""
     builder, weights = ARCHITECTURES[architecture]
     model = builder(weights=weights if pretrained else None, min_size=size, max_size=size,
-                    box_score_thresh=0.01, box_detections_per_img=20)
+                    box_score_thresh=0.01, box_detections_per_img=20, **kwargs)
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = faster_rcnn.FastRCNNPredictor(in_features, 2)
     return model
