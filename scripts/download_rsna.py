@@ -7,9 +7,8 @@ environment variables). The rules forbid redistributing the images: everything s
 
 After the download, the script checks the volumes (number of DICOM files, label rows,
 consistency between the label tables and the image folder) and writes a manifest
-(relative path, size, SHA-256 of every file). The manifest is written to
-``data/raw_manifest.csv`` and copied to ``metadata/raw_manifest.csv`` (file names and
-hashes only, no image content); its own SHA-256 is printed and stored in
+(relative path, size, SHA-256 of every file) to ``metadata/raw_manifest.csv`` (file
+names and hashes only, no image content); its own SHA-256 is printed and stored in
 ``metadata/raw_summary.json``.
 
     python scripts/download_rsna.py            # download (if needed) + checks + manifest
@@ -24,7 +23,6 @@ import argparse
 import csv
 import hashlib
 import json
-import shutil
 import sys
 import zipfile
 import zlib
@@ -154,7 +152,8 @@ def write_manifest() -> str:
         p for p in RAW.rglob("*")
         if p.is_file() and not p.name.startswith(".") and ".kaggle" not in p.parts
     )
-    target = RAW.parent / "raw_manifest.csv"
+    METADATA.mkdir(exist_ok=True)
+    target = METADATA / "raw_manifest.csv"
     with target.open("w", newline="", encoding="utf-8") as f:
         writer = csv.writer(f, lineterminator="\n")
         writer.writerow(["path", "bytes", "sha256"])
@@ -162,8 +161,6 @@ def write_manifest() -> str:
             writer.writerow([p.relative_to(RAW).as_posix(), p.stat().st_size, sha256_file(p)])
             if i % 5000 == 0:
                 print(f"  hashed {i}/{len(files)} files", flush=True)
-    METADATA.mkdir(exist_ok=True)
-    shutil.copyfile(target, METADATA / "raw_manifest.csv")
     return sha256_file(target)
 
 
