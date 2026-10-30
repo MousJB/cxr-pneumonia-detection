@@ -1,0 +1,31 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                           aten::conv2d         0.06%      12.701ms         1.23%     251.152ms     179.394us       0.000us         0.00%       13.412s       9.580ms          1400  
+autograd::engine::evaluate_function: ConvolutionBack...         0.06%      11.751ms         0.56%     114.005ms     175.392us       0.000us         0.00%       11.723s      18.035ms           650  
+                                   ConvolutionBackward0         0.02%       3.113ms         0.48%      97.660ms     150.246us       0.000us         0.00%       11.697s      17.996ms           650  
+                             aten::convolution_backward         0.25%      51.450ms         0.46%      94.547ms     145.457us       11.682s        57.91%       11.697s      17.996ms           650  
+                                      aten::convolution         0.04%       9.168ms         0.44%      90.021ms     118.449us       0.000us         0.00%        6.828s       8.985ms           760  
+                                     aten::_convolution         0.05%       9.625ms         0.40%      80.853ms     106.386us       0.000us         0.00%        6.828s       8.985ms           760  
+                                aten::cudnn_convolution         0.21%      43.647ms         0.30%      62.040ms      81.632us        6.800s        33.71%        6.800s       8.948ms           760  
+sm75_xmma_fprop_implicit_gemm_f16f16_f16f32_f32_nhwc...         0.00%       0.000us         0.00%       0.000us       0.000us        3.584s        17.77%        3.584s      22.401ms           160  
+sm75_xmma_wgrad_implicit_gemm_indexed_f16f16_f16f32_...         0.00%       0.000us         0.00%       0.000us       0.000us        2.650s        13.14%        2.650s      37.856ms            70  
+_5x_cudnn_turing_fp16_s1688cudnn_fp16_256x128_ldg8_d...         0.00%       0.000us         0.00%       0.000us       0.000us        2.209s        10.95%        2.209s     110.450ms            20  
+           volta_fp16_s884gemm_fp16_128x256_ldg8_f2f_nn         0.00%       0.000us         0.00%       0.000us       0.000us        1.828s         9.06%        1.828s       6.304ms           290  
+sm75_xmma_dgrad_implicit_gemm_f16f16_f16f32_f32_nhwc...         0.00%       0.000us         0.00%       0.000us       0.000us        1.395s         6.92%        1.395s       8.721ms           160  
+           volta_fp16_s884gemm_fp16_128x256_ldg8_f2f_nt         0.00%       0.000us         0.00%       0.000us       0.000us        1.192s         5.91%        1.192s       4.585ms           260  
+sm75_xmma_wgrad_implicit_gemm_indexed_f16f16_f16f32_...         0.00%       0.000us         0.00%       0.000us       0.000us     911.888ms         4.52%     911.888ms      15.198ms            60  
+                    volta_s884gemm_fp16_128x256_ldg8_tn         0.00%       0.000us         0.00%       0.000us       0.000us     725.876ms         3.60%     725.876ms       5.584ms           130  
+sm75_xmma_wgrad_implicit_gemm_indexed_f16f16_f16f32_...         0.00%       0.000us         0.00%       0.000us       0.000us     554.271ms         2.75%     554.271ms       6.928ms            80  
+                                            aten::copy_         0.42%      84.821ms        36.29%        7.402s       1.614ms     450.985ms         2.24%     506.286ms     110.398us          4586  
+                                               aten::to         0.07%      13.648ms        36.36%        7.415s       1.252ms       0.000us         0.00%     444.977ms      75.114us          5924  
+                                         aten::_to_copy         0.19%      39.196ms        36.29%        7.402s       1.808ms       0.000us         0.00%     444.977ms     108.690us          4094  
+                     volta_s884gemm_fp16_64x128_ldg8_tn         0.00%       0.000us         0.00%       0.000us       0.000us     360.727ms         1.79%     360.727ms       5.153ms            70  
+            volta_fp16_s884gemm_fp16_64x128_ldg8_f2f_nn         0.00%       0.000us         0.00%       0.000us       0.000us     283.292ms         1.40%     283.292ms       5.666ms            50  
+sm75_xmma_dgrad_implicit_gemm_indexed_f16f16_f16f32_...         0.00%       0.000us         0.00%       0.000us       0.000us     268.360ms         1.33%     268.360ms       6.709ms            40  
+sm75_xmma_fprop_implicit_gemm_f16f16_f16f32_f32_nhwc...         0.00%       0.000us         0.00%       0.000us       0.000us     268.208ms         1.33%     268.208ms       6.705ms            40  
+                                             aten::add_         0.06%      12.546ms         0.10%      21.138ms      22.976us     266.166ms         1.32%     266.166ms     289.311us           920  
+_ZN2at6native29vectorized_elementwise_kernelILi4EZNS...         0.00%       0.000us         0.00%       0.000us       0.000us     263.529ms         1.31%     263.529ms     132.693us          1986  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 20.395s
+Self CUDA time total: 20.173s

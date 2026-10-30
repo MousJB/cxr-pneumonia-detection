@@ -11,7 +11,14 @@ import pytest
 import torch
 
 from cxr import data
-from cxr.data import MIN_BOX_SIDE, TRAIN_TRANSFORM, Affine, Compose, DetectionDataset, HorizontalFlip
+from cxr.data import (
+    MIN_BOX_SIDE,
+    TRAIN_TRANSFORM,
+    Affine,
+    Compose,
+    DetectionDataset,
+    HorizontalFlip,
+)
 
 H, W = 96, 128
 

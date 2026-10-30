@@ -1,0 +1,31 @@
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+autograd::engine::evaluate_function: ConvolutionBack...         0.18%      13.588ms         1.44%     110.331ms     169.740us       0.000us         0.00%        2.508s       3.859ms           650  
+                                   ConvolutionBackward0         0.06%       4.284ms         1.16%      88.811ms     136.633us       0.000us         0.00%        2.372s       3.649ms           650  
+                             aten::convolution_backward         0.63%      48.018ms         1.10%      84.527ms     130.042us        2.345s        31.38%        2.372s       3.649ms           650  
+                                  volta_sgemm_32x128_tn         0.00%       0.000us         0.00%       0.000us       0.000us        1.591s        21.29%        1.591s       5.682ms           280  
+                                           aten::conv2d         0.05%       3.558ms         1.10%      84.567ms     111.273us       0.000us         0.00%        1.370s       1.802ms           760  
+                                      aten::convolution         0.15%      11.565ms         1.06%      81.009ms     106.591us       0.000us         0.00%        1.370s       1.802ms           760  
+                                     aten::_convolution         0.12%       9.506ms         0.91%      69.444ms      91.374us       0.000us         0.00%        1.370s       1.802ms           760  
+_5x_cudnn_volta_scudnn_winograd_128x128_ldg1_ldg4_re...         0.00%       0.000us         0.00%       0.000us       0.000us        1.329s        17.78%        1.329s       3.322ms           400  
+                                aten::cudnn_convolution         0.50%      38.332ms         0.68%      51.866ms      68.245us        1.320s        17.67%        1.320s       1.737ms           760  
+                                           aten::linear         0.00%     176.900us         0.04%       2.684ms      67.112us       0.000us         0.00%        1.157s      28.923ms            40  
+                                            aten::addmm         0.02%       1.588ms         0.03%       2.067ms      51.672us        1.157s        15.48%        1.157s      28.923ms            40  
+                                  volta_sgemm_32x128_nt         0.00%       0.000us         0.00%       0.000us       0.000us     590.919ms         7.91%     590.919ms       1.136ms           520  
+                                  volta_sgemm_32x128_nn         0.00%       0.000us         0.00%       0.000us       0.000us     450.696ms         6.03%     450.696ms       1.554ms           290  
+autograd::engine::evaluate_function: GeneratedBackwa...         0.01%     502.200us         0.10%       7.360ms     183.988us       0.000us         0.00%     435.894ms      10.897ms            40  
+GeneratedBackwardFor_torchvision_roi_align_defaultBa...         0.03%       1.974ms         0.09%       6.857ms     171.433us       0.000us         0.00%     435.894ms      10.897ms            40  
+                       torchvision::_roi_align_backward         0.04%       3.069ms         0.06%       4.883ms     122.078us     428.259ms         5.73%     435.894ms      10.897ms            40  
+_ZN6vision3ops57_GLOBAL__N__d0958a3e_19_roi_align_ke...         0.00%       0.000us         0.00%       0.000us       0.000us     428.259ms         5.73%     428.259ms      11.575ms            37  
+    autograd::engine::evaluate_function: AddmmBackward0         0.01%     869.300us         0.10%       7.837ms     195.920us       0.000us         0.00%     387.800ms       9.695ms            40  
+                                         AddmmBackward0         0.01%     883.300us         0.07%       5.342ms     133.560us       0.000us         0.00%     383.694ms       9.592ms            40  
+                                               aten::mm         0.03%       2.270ms         0.05%       3.566ms      44.576us     383.694ms         5.13%     383.694ms       4.796ms            80  
+                                             aten::add_         0.17%      12.803ms         0.26%      20.202ms      21.958us     312.377ms         4.18%     312.377ms     339.540us           920  
+_ZN2at6native29vectorized_elementwise_kernelILi4ENS0...         0.00%       0.000us         0.00%       0.000us       0.000us     290.531ms         3.89%     290.531ms     190.138us          1528  
+                                              aten::mul         0.67%      51.697ms         1.06%      81.025ms      29.230us     264.920ms         3.55%     264.920ms      95.570us          2772  
+_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us     260.588ms         3.49%     260.588ms     217.883us          1196  
+_ZN2at6native18elementwise_kernelILi128ELi2EZNS0_22g...         0.00%       0.000us         0.00%       0.000us       0.000us     229.173ms         3.07%     229.173ms     165.587us          1384  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 7.668s
+Self CUDA time total: 7.473s

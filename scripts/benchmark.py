@@ -53,7 +53,8 @@ def main() -> None:
     # Same mix as the planned sampler: half positive, half negative images
     pos = [r["case_id"] for r in rows if r["target"] == "1"]
     neg = [r["case_id"] for r in rows if r["target"] == "0"]
-    cases = list(rng.choice(pos, args.images // 2, replace=False)) + list(rng.choice(neg, args.images // 2, replace=False))
+    half = args.images // 2
+    cases = list(rng.choice(pos, half, replace=False)) + list(rng.choice(neg, half, replace=False))
     loader = torch.utils.data.DataLoader(DetectionDataset(cases, load_boxes()), batch_size=args.batch_size,
                                          shuffle=True, num_workers=4, collate_fn=collate, persistent_workers=True)
 

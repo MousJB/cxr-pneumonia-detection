@@ -1,0 +1,69 @@
+# MedVision QA v0.1 evaluation of the RSNA lung-opacity detectors (schema:
+# medvision-qa docs/evaluation_config.md, validated by tests/test_config.py).
+#
+# Pre-registered with PROTOCOL.md, BEFORE any final training. After training, only the
+# metadata may be filled in (code_commit, weights_sha256); [classes], [statistics],
+# [sample_size] and [[criteria]] must not change. The CSV files are written in Stage 5
+# (single test evaluation), see PROTOCOL.md §7.4 for the detection → image conversion.
+schema_version = "0.1"
+
+[evaluation]
+title = "RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)"
+objective = "Check, on the patient-disjoint test split, that reducing the input resolution from 512 to 384 px (about 1.4 times faster training in float32 on the GTX 1650) does not make the image-level detection of lung opacity worse: AUROC, sensitivity and specificity of B not inferior to A."
+
+[classes]
+order = ["no_opacity", "opacity"]
+positive = ["opacity"]   # image with at least one lung-opacity box vs without
+
+[data]
+ground_truth_mode = "separate_file"
+ground_truth_file = "medvision/ground_truth.csv"
+description = "RSNA Pneumonia Detection Challenge (Kaggle, stage 2 train), 26,684 frontal chest radiographs from NIH ChestX-ray14. Test split = 5,349 images (1,207 with opacity) of 2,290 NIH patients, drawn by patient (seed 20261030); no patient shared with training or validation. Split: metadata/split.csv, SHA-256 9ec285f5399c198c1d0cd23f1e5b3a9e9b99cee3ab18bccd473115fd4cb7040c. manifest_sha256 = metadata/raw_manifest.csv (SHA-256 of every downloaded file)."
+nature = "clinical"
+manifest_sha256 = "9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12af7"
+
+[versions.A]
+id = "frcnn-r50-fpn-512"
+predictions_file = "medvision/preds_r50_512.csv"
+code_commit = ""        # filled in after training
+weights_sha256 = ""     # filled in after training
+preprocessing = "DICOM (uint8, 1024 px) -> 512 px PNG (PIL BOX, area average); [0, 1], repeated on 3 channels; ImageNet normalisation inside the model; fed at 512 px (no resize)"
+description = "torchvision fasterrcnn_resnet50_fpn, COCO_V1 weights, 2-class head, trainable_backbone_layers = 3. score_opacity = max box score mapped so that the validation-chosen threshold tau maps to 0.5 (PROTOCOL.md §7.4)"
+
+[versions.B]
+id = "frcnn-r50-fpn-384"
+predictions_file = "medvision/preds_r50_384.csv"
+code_commit = ""
+weights_sha256 = ""
+preprocessing = "Same 512 px PNG; resized to 384 px inside the model (bilinear, torchvision GeneralizedRCNNTransform); boxes returned in 512 px coordinates"
+description = "Same model, recipe, seed and budget as A; only change: min_size = max_size = 384. Same score mapping with its own validation-chosen tau"
+
+[statistics]
+confidence_level = 0.95
+bootstrap_resamples = 2000
+seed = 20261030
+
+[sample_size]
+status = "based_on_data_availability"
+justification = "Size set by the public dataset and the 70/10/20 patient-level split fixed in Step 2 (commit abfc675). No power calculation was done."
+
+[[criteria]]
+id = "C1"
+description = "Image-level AUROC (opacity vs none) of B not inferior to A, margin 0.02"
+kind = "non_inferiority"
+metric = "auroc"
+margin = 0.02
+
+[[criteria]]
+id = "C2"
+description = "Image-level sensitivity of B at its tau not inferior to A at its tau, margin 0.05"
+kind = "non_inferiority"
+metric = "sensitivity"
+margin = 0.05
+
+[[criteria]]
+id = "C3"
+description = "Image-level specificity of B at its tau not inferior to A at its tau, margin 0.05"
+kind = "non_inferiority"
+metric = "specificity"
+margin = 0.05
