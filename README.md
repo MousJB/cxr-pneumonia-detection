@@ -45,6 +45,8 @@ selection conditions of §8 (competition metric Δ lower bound −0.009 > −0.0
 before the test split was read**: [`results/validation_selection.md`](results/validation_selection.md).
 Training logs: `results/training_log_*.jsonl`.
 
+![Validation competition metric per epoch, A and B](results/figures/validation_curves.svg)
+
 Run A was interrupted once, during epoch 7: Windows ran out of commit memory (error
 1455) in a data-loading worker. It was resumed from the state saved after epoch 6
 (`--resume`, logged as a `resume` event) and epoch 7 was restarted from its beginning,
@@ -53,6 +55,8 @@ as `PROTOCOL.md` §6 provides. The GPU hours above count completed epochs only.
 ### Test split (5,349 images, 2,290 patients, evaluated once)
 
 Full tables: [`results/test/test_results.md`](results/test/test_results.md).
+
+![Test differences B minus A with 95 % confidence intervals and pre-registered margins](results/figures/test_differences.svg)
 
 | Metric | A, 512 px | B, 384 px | B − A |
 |---|---|---|---|
@@ -92,6 +96,10 @@ Full tables: [`results/test/test_results.md`](results/test/test_results.md).
 - Per-image competition metric of an image without opacity is 0 if any box is predicted
   and the image is left out otherwise, hence the 0.000 of the "0 boxes" row in the full
   table; specificity is the relevant measure for that group.
+
+![Test box recall by opacity size, A and B](results/figures/test_recall_by_size.svg)
+
+Figures: `scripts/make_figures.py`, from the committed result files.
 
 ### Limitations of these results
 
@@ -195,7 +203,7 @@ and box metrics, AUROC, paired patient bootstrap, selection rule.
 | `cxr/models.py` | Faster R-CNN builders (COCO weights, 2-class head) |
 | `cxr/metric.py` | competition metric |
 | `cxr/training.py`, `cxr/evaluation.py` | sampler, early stopping, τ selection; evaluation and bootstrap |
-| `scripts/` | download, preparation, GPU benchmarks (`benchmark.py`, `precision_benchmark.py`), training (`train.py`), evaluation (`evaluate.py`) |
+| `scripts/` | download, preparation, GPU benchmarks (`benchmark.py`, `precision_benchmark.py`), training (`train.py`), evaluation (`evaluate.py`), figures (`make_figures.py`) |
 | `metadata/` | manifests, split, duplicate audit (byte-exact, hashed) |
 | `PROTOCOL.md`, `config.toml` | pre-registered protocol and MedVision QA configuration |
 | `results/` | benchmarks, training logs, validation selection, test results and box predictions |

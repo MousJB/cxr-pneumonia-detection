@@ -45,6 +45,8 @@
 [`results/validation_selection.md`](results/validation_selection.md)。学習ログ：
 `results/training_log_*.jsonl`。
 
+![A と B のエポックごとの検証コンペティション指標](results/figures/validation_curves.svg)
+
 実行 A はエポック 7 の途中で 1 回中断した：データ読み込みワーカーで Windows のコミット
 メモリが不足した（エラー 1455）。`PROTOCOL.ja.md` §6 の規定どおり、エポック 6 の後に保存した
 状態から再開し（`--resume`、ログに `resume` イベントとして記録）、エポック 7 を最初からやり直した。
@@ -53,6 +55,8 @@
 ### テスト分割（5,349 枚、2,290 人、1 回のみ評価）
 
 全表：[`results/test/test_results.md`](results/test/test_results.md)。
+
+![テストにおける B − A の差、95 % 信頼区間と事前登録マージン](results/figures/test_differences.svg)
 
 | 指標 | A、512 px | B、384 px | B − A |
 |---|---|---|---|
@@ -90,6 +94,10 @@
 - 陰影のない画像の画像単位コンペティション指標は、ボックスが 1 つでも予測されれば 0、
   されなければその画像は除外される。そのため全表の「0 ボックス」の行は 0.000 となる。
   この群で意味のある指標は特異度である。
+
+![陰影の大きさ別のテストのボックス再現率、A と B](results/figures/test_recall_by_size.svg)
+
+図：`scripts/make_figures.py`（コミット済みの結果ファイルから生成。図中の表記は英語）。
 
 ### これらの結果の限界
 
@@ -190,7 +198,7 @@ MedVision QA の検証を通り、プロトコルと一致すること。
 | `cxr/models.py` | Faster R-CNN の構築（COCO 重み、2 クラスヘッド） |
 | `cxr/metric.py` | コンペティション指標 |
 | `cxr/training.py`、`cxr/evaluation.py` | サンプラー、早期終了、τ の選択。評価とブートストラップ |
-| `scripts/` | ダウンロード、前処理、GPU ベンチマーク（`benchmark.py`、`precision_benchmark.py`）、学習（`train.py`）、評価（`evaluate.py`） |
+| `scripts/` | ダウンロード、前処理、GPU ベンチマーク（`benchmark.py`、`precision_benchmark.py`）、学習（`train.py`）、評価（`evaluate.py`）、図（`make_figures.py`） |
 | `metadata/` | マニフェスト、分割、重複監査（バイト単位で固定、ハッシュ記録済み） |
 | `PROTOCOL.md`、`config.toml` | 事前登録プロトコルと MedVision QA の設定 |
 | `results/` | ベンチマーク、学習ログ、検証での選択、テスト結果とボックス予測 |
