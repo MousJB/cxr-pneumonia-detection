@@ -22,7 +22,7 @@ with two model versions compared under a protocol fixed **before** training
 | 3. Computational benchmark and pre-registered protocol ([`PROTOCOL.md`](PROTOCOL.md), [`config.toml`](config.toml)) | done (commit `9a83f04`) |
 | 4. Final training of A (512 px) and B (384 px), selection on validation | done (commit `16d087a`): B selected |
 | 5. Single evaluation on the test split, MedVision QA, error analysis | done |
-| 6. Results, limitations, publication | results below; MedVision QA demo integration in review ([pull request](https://github.com/MousJB/medvision-qa/pull/2)) |
+| 6. Results, limitations, publication | done: results below; MedVision QA demo `/demo/rsna-pneumonia` in [pull request #2](https://github.com/MousJB/medvision-qa/pull/2), checked on its Vercel preview (first computation 20 s) |
 
 ## Results
 
