@@ -73,8 +73,8 @@
 - **MedVision QA（§9.2）：** C1 AUROC、C2 感度、C3 特異度：3 つとも **SATISFIED**。
   バージョン検証記録：[`reports/vvr_en.html`](reports/vvr_en.html)、
   [`reports/vvr_ja.html`](reports/vvr_ja.html)。入力ファイルは [`medvision/`](medvision/)。
-  MedVision QA は独自に患者単位のブートストラップを行う：点推定値は同じで、区間の差は上表と
-  0.002 以内。
+  MedVision QA は独自に患者単位のブートストラップを行う：点推定値は同じで、区間の上下限の差は上表と
+  0.004 以内（B − A の差については 0.002 以内）。
 - 同じ τ = 0.80 において、B は A より多くの画像を陽性と判定する：感度が高く、特異度が低い
   （−1.4 ポイント、区間はゼロを含まない）。これは動作点の違いであり、検出器として優れている
   わけではない：画像単位の AUROC は同じである。

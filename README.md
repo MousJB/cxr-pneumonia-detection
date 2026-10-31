@@ -73,8 +73,8 @@ Full tables: [`results/test/test_results.md`](results/test/test_results.md).
 - **MedVision QA (§9.2):** C1 AUROC, C2 sensitivity, C3 specificity: **SATISFIED**, all
   three. Version Verification Records: [`reports/vvr_en.html`](reports/vvr_en.html),
   [`reports/vvr_ja.html`](reports/vvr_ja.html); input files in [`medvision/`](medvision/).
-  MedVision QA runs its own patient bootstrap: same point estimates, intervals within
-  0.002 of the ones above.
+  MedVision QA runs its own patient bootstrap: same point estimates, interval bounds within
+  0.004 of the ones above (0.002 for the differences B − A).
 - At the same τ = 0.80, B flags more images than A: higher sensitivity, lower
   specificity (−1.4 points, interval excluding zero). This is a different operating
   point, not a better detector: the image AUROC is the same.
