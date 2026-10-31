@@ -22,7 +22,7 @@
 | 3. 計算ベンチマークと事前登録プロトコル（[`PROTOCOL.ja.md`](PROTOCOL.ja.md)、[`config.toml`](config.toml)） | 完了（commit `9a83f04`） |
 | 4. A（512 px）と B（384 px）の最終学習、検証セットでの選択 | 完了（commit `16d087a`）：B を選択 |
 | 5. テスト分割での 1 回限りの評価、MedVision QA、誤り分析 | 完了 |
-| 6. 結果、限界、公開 | 結果は以下。MedVision QA デモへの統合は未実施 |
+| 6. 結果、限界、公開 | 結果は以下。MedVision QA デモへの統合はレビュー中（[プルリクエスト](https://github.com/MousJB/medvision-qa/pull/2)） |
 
 ## 結果
 
