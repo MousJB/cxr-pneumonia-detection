@@ -18,9 +18,9 @@
 | ステージ | 状態 |
 |---|---|
 | 1. 環境構築、ダウンロード、データマニフェスト | 完了 |
-| 2. 前処理（DICOM → PNG、患者単位の分割、重複監査、コンペティション指標） | 完了（commit `abfc675`） |
-| 3. 計算ベンチマークと事前登録プロトコル（[`PROTOCOL.ja.md`](PROTOCOL.ja.md)、[`config.toml`](config.toml)） | 完了（commit `d4aa648`） |
-| 4. A（512 px）と B（384 px）の最終学習、検証セットでの選択 | 完了（commit `afe4b6d`）：B を選択 |
+| 2. 前処理（DICOM → PNG、患者単位の分割、重複監査、コンペティション指標） | 完了（commit `a0ea6d6`） |
+| 3. 計算ベンチマークと事前登録プロトコル（[`PROTOCOL.ja.md`](PROTOCOL.ja.md)、[`config.toml`](config.toml)） | 完了（commit `9a83f04`） |
+| 4. A（512 px）と B（384 px）の最終学習、検証セットでの選択 | 完了（commit `16d087a`）：B を選択 |
 | 5. テスト分割での 1 回限りの評価、MedVision QA、誤り分析 | 完了 |
 | 6. 結果、限界、公開 | 結果は以下。MedVision QA デモへの統合は未実施 |
 
@@ -161,7 +161,7 @@ python -m venv .venv
 `scripts/prepare_rsna.py` は 512 px の PNG とボックス・画像の表を `data/`（git の管理対象外）
 に、`metadata/split.csv` と `metadata/data_audit.json`（バージョン管理対象）を出力する。
 
-### ステップ 2 の概要（commit `abfc675`）
+### ステップ 2 の概要（commit `a0ea6d6`）
 
 26,684 枚の DICOM 画像（1024 px、8 ビット）を 2 × 2 の面積平均で 512 px PNG に縮小。
 RSNA→NIH 対応表を用いた患者単位の分割（DICOM の `SOPInstanceUID` で画像ごとに確認済み）。
@@ -191,6 +191,28 @@ MedVision QA の検証を通り、プロトコルと一致すること。
 `tests/test_training.py`：バランス済みサンプラー、永続的なデータワーカーへのエポック番号の
 伝達、ウォームアップ、早期終了、τ の選択。`tests/test_evaluation.py`：ボックスの対応付け、
 画像単位・ボックス単位の指標、AUROC、対応のある患者単位ブートストラップ、選択規則。
+
+## コミットハッシュ
+
+2026-11-01 に、4 件のコミットメッセージから共著者の行を削除するため履歴を書き換えた。
+変更したのはメッセージのみで、各コミットのファイルツリー、作成者、日時は同じだが、ハッシュは
+新しくなった。この README は新しいハッシュを記載する。記録にあたるファイルは作成時のハッシュを
+そのまま残す：`PROTOCOL.md`（その SHA-256 は学習ログに記録）、`config.toml`、`results/`、
+`reports/`、`scripts/benchmark.py`。
+
+| 元のハッシュ | 現在のハッシュ | メッセージ |
+|---|---|---|
+| `a85485b` | `1eab7c9` | Project setup: download script with volume checks and manifest, pinned requirements, README skeleton (EN, JA) |
+| `b871d49` | `9904e85` | Data check: archive verified member by member (size, CRC-32), volumes checked, SHA-256 manifest of the 29,688 files |
+| `8c26245` | `cd29ab2` | Keep metadata files byte-exact on checkout (their SHA-256 is recorded) |
+| `abfc675` | `a0ea6d6` | Step 2: prepare data (DICOM → 512 PNG, patient-level split, duplicate audit) |
+| `8071015` | `bd56569` | Fix Affine augmentation: boxes now follow the image; geometric tests |
+| `d4aa648` | `9a83f04` | Stage 3: pre-registered protocol, MedVision QA config, precision study, training and evaluation code |
+| `afe4b6d` | `16d087a` | Stage 4: final training of A and B, model selection on validation |
+| `a37f3cb` | `3e58c0d` | Stage 5: single test evaluation, MedVision QA records, results in the READMEs |
+| `d5a1b92` | `fac8961` | Aggregate figures of the results (SVG, generated from the committed result files) |
+| `e41befb` | `879e9b0` | READMEs: MedVision QA intervals differ from the evaluation script's by at most 0.002 (own bootstrap) |
+| `17c2eab` | `0e538a8` | READMEs: correct the bound on the MedVision QA interval differences (0.004 per model, 0.002 for B - A) |
 
 ## リポジトリ構成
 

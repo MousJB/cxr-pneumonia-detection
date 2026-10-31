@@ -18,9 +18,9 @@ with two model versions compared under a protocol fixed **before** training
 | Stage | State |
 |---|---|
 | 1. Setup, download, data manifest | done |
-| 2. Preparation (DICOM → PNG, patient-level split, duplicate audit, competition metric) | done (commit `abfc675`) |
-| 3. Computational benchmark and pre-registered protocol ([`PROTOCOL.md`](PROTOCOL.md), [`config.toml`](config.toml)) | done (commit `d4aa648`) |
-| 4. Final training of A (512 px) and B (384 px), selection on validation | done (commit `afe4b6d`): B selected |
+| 2. Preparation (DICOM → PNG, patient-level split, duplicate audit, competition metric) | done (commit `a0ea6d6`) |
+| 3. Computational benchmark and pre-registered protocol ([`PROTOCOL.md`](PROTOCOL.md), [`config.toml`](config.toml)) | done (commit `9a83f04`) |
+| 4. Final training of A (512 px) and B (384 px), selection on validation | done (commit `16d087a`): B selected |
 | 5. Single evaluation on the test split, MedVision QA, error analysis | done |
 | 6. Results, limitations, publication | results below; MedVision QA demo integration not done |
 
@@ -165,7 +165,7 @@ python -m venv .venv
 `scripts/prepare_rsna.py` writes the 512 px PNG and the box and image tables to `data/`
 (ignored by git) and `metadata/split.csv` and `metadata/data_audit.json` (versioned).
 
-### Step 2 summary (commit `abfc675`)
+### Step 2 summary (commit `a0ea6d6`)
 
 26,684 DICOM images (1024 px, 8-bit) reduced to 512 px PNG by 2 × 2 area averaging.
 Patient-level split via the RSNA-to-NIH mapping, verified image by image with the DICOM
@@ -196,6 +196,28 @@ image under every augmentation (synthetic rectangles). `tests/test_config.py`:
 `tests/test_training.py`: balanced sampler, epoch reaching persistent data workers,
 warm-up, early stopping, τ selection. `tests/test_evaluation.py`: box matching, image
 and box metrics, AUROC, paired patient bootstrap, selection rule.
+
+## Commit hashes
+
+On 2026-11-01 the history was rewritten to remove co-author lines from four commit
+messages. Only the messages changed: every commit keeps its file tree, author and date, but
+gets a new hash. This README cites the new hashes. Files that are records keep the hashes
+they were written with: `PROTOCOL.md` (its SHA-256 is in the training logs), `config.toml`,
+`results/`, `reports/` and `scripts/benchmark.py`.
+
+| Original | Current | Message |
+|---|---|---|
+| `a85485b` | `1eab7c9` | Project setup: download script with volume checks and manifest, pinned requirements, README skeleton (EN, JA) |
+| `b871d49` | `9904e85` | Data check: archive verified member by member (size, CRC-32), volumes checked, SHA-256 manifest of the 29,688 files |
+| `8c26245` | `cd29ab2` | Keep metadata files byte-exact on checkout (their SHA-256 is recorded) |
+| `abfc675` | `a0ea6d6` | Step 2: prepare data (DICOM → 512 PNG, patient-level split, duplicate audit) |
+| `8071015` | `bd56569` | Fix Affine augmentation: boxes now follow the image; geometric tests |
+| `d4aa648` | `9a83f04` | Stage 3: pre-registered protocol, MedVision QA config, precision study, training and evaluation code |
+| `afe4b6d` | `16d087a` | Stage 4: final training of A and B, model selection on validation |
+| `a37f3cb` | `3e58c0d` | Stage 5: single test evaluation, MedVision QA records, results in the READMEs |
+| `d5a1b92` | `fac8961` | Aggregate figures of the results (SVG, generated from the committed result files) |
+| `e41befb` | `879e9b0` | READMEs: MedVision QA intervals differ from the evaluation script's by at most 0.002 (own bootstrap) |
+| `17c2eab` | `0e538a8` | READMEs: correct the bound on the MedVision QA interval differences (0.004 per model, 0.002 for B - A) |
 
 ## Repository layout
 
