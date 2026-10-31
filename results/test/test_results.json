@@ -1,0 +1,616 @@
+{
+ "split": "test",
+ "selected": "B",
+ "selected_run_id": "frcnn-r50-fpn-384",
+ "tau": {
+  "A": 0.8,
+  "B": 0.8
+ },
+ "bootstrap": {
+  "models": {
+   "A": {
+    "rsna_metric": {
+     "value": 0.20526296829971186,
+     "ci": [
+      0.17854557123865872,
+      0.2340012003953641
+     ]
+    },
+    "sensitivity": {
+     "value": 0.6835128417564209,
+     "ci": [
+      0.6375698409372653,
+      0.7289565069516405
+     ]
+    },
+    "specificity": {
+     "value": 0.8725253500724288,
+     "ci": [
+      0.8553142597767344,
+      0.8879670057717812
+     ]
+    },
+    "precision_image": {
+     "value": 0.6097560975609756,
+     "ci": [
+      0.5698972317535703,
+      0.6476614690641194
+     ]
+    },
+    "box_recall": {
+     "value": 0.49101181304571134,
+     "ci": [
+      0.4423688042705726,
+      0.5419480898737742
+     ]
+    },
+    "box_precision": {
+     "value": 0.489002557544757,
+     "ci": [
+      0.44295347590187184,
+      0.5352121234944914
+     ]
+    },
+    "mean_iou_matched": {
+     "value": 0.6609782917170922,
+     "ci": [
+      0.6501222220928848,
+      0.670789203839156
+     ]
+    },
+    "small_box_recall": {
+     "value": 0.18142235123367198,
+     "ci": [
+      0.14762949373440876,
+      0.21490761467444985
+     ]
+    },
+    "auroc_image": {
+     "value": 0.8883152638099737,
+     "ci": [
+      0.8749102191761188,
+      0.9027662064327207
+     ]
+    }
+   },
+   "B": {
+    "rsna_metric": {
+     "value": 0.2189954401637821,
+     "ci": [
+      0.1883120232145503,
+      0.25207891631218443
+     ]
+    },
+    "sensitivity": {
+     "value": 0.7116818558409279,
+     "ci": [
+      0.6653954320738283,
+      0.75327485144967
+     ]
+    },
+    "specificity": {
+     "value": 0.859005311443747,
+     "ci": [
+      0.8406762514365794,
+      0.8758172741489234
+     ]
+    },
+    "precision_image": {
+     "value": 0.5952875952875953,
+     "ci": [
+      0.55628562111178,
+      0.6359086277661725
+     ]
+    },
+    "box_recall": {
+     "value": 0.5125834617360041,
+     "ci": [
+      0.4619281219455297,
+      0.5625878492598289
+     ]
+    },
+    "box_precision": {
+     "value": 0.47728359636537543,
+     "ci": [
+      0.43111657231379075,
+      0.5258621659143438
+     ]
+    },
+    "mean_iou_matched": {
+     "value": 0.6742176249060134,
+     "ci": [
+      0.6614016598214378,
+      0.6867433278163514
+     ]
+    },
+    "small_box_recall": {
+     "value": 0.17561683599419448,
+     "ci": [
+      0.1471829640947288,
+      0.2054803967879074
+     ]
+    },
+    "auroc_image": {
+     "value": 0.8888963342357094,
+     "ci": [
+      0.8752971937270982,
+      0.9030943635696214
+     ]
+    }
+   }
+  },
+  "differences": {
+   "B - A": {
+    "rsna_metric": {
+     "value": 0.013732471864070256,
+     "ci": [
+      0.003997137068736869,
+      0.0237783078833535
+     ]
+    },
+    "sensitivity": {
+     "value": 0.028169014084507005,
+     "ci": [
+      0.0082533441980129,
+      0.04945542046605878
+     ]
+    },
+    "specificity": {
+     "value": -0.013520038628681785,
+     "ci": [
+      -0.02019477007032803,
+      -0.006895832804716021
+     ]
+    },
+    "precision_image": {
+     "value": -0.014468502273380257,
+     "ci": [
+      -0.02755620796894828,
+      -0.00026925800022002075
+     ]
+    },
+    "box_recall": {
+     "value": 0.021571648690292766,
+     "ci": [
+      0.005850598474763705,
+      0.03765730282152431
+     ]
+    },
+    "box_precision": {
+     "value": -0.011718961179381593,
+     "ci": [
+      -0.024797908005845564,
+      0.0014777484070747189
+     ]
+    },
+    "mean_iou_matched": {
+     "value": 0.013239333188921232,
+     "ci": [
+      0.005434903314983262,
+      0.020045466035042897
+     ]
+    },
+    "small_box_recall": {
+     "value": -0.0058055152394775045,
+     "ci": [
+      -0.029909111622375594,
+      0.01911893910918998
+     ]
+    },
+    "auroc_image": {
+     "value": 0.0005810704257356303,
+     "ci": [
+      -0.002776988150112624,
+      0.0038496196604197283
+     ]
+    }
+   }
+  },
+  "resamples": 2000,
+  "seed": 20261030,
+  "level": 0.95,
+  "images": 5349,
+  "patients": 2290
+ },
+ "primary_non_inferiority": {
+  "metric": "competition metric, B - A",
+  "value": 0.013732471864070256,
+  "ci": [
+   0.003997137068736869,
+   0.0237783078833535
+  ],
+  "margin": 0.02,
+  "state": "SATISFIED"
+ },
+ "medvision_qa": {
+  "en": {
+   "returncode": 0,
+   "stdout": "SATISFIED \u2014 all 3 criteria are satisfied\nReport: C:\\Users\\jabie\\Downloads\\cxr-pneumonia-detection\\reports\\vvr_en.html",
+   "stderr": ""
+  },
+  "ja": {
+   "returncode": 0,
+   "stdout": "SATISFIED \u2014 all 3 criteria are satisfied\nReport: C:\\Users\\jabie\\Downloads\\cxr-pneumonia-detection\\reports\\vvr_ja.html",
+   "stderr": ""
+  }
+ },
+ "error_analysis": {
+  "A": {
+   "view": {
+    "AP": {
+     "images": 2433,
+     "rsna_metric": 0.2257751572327045,
+     "sensitivity": 0.7516059957173448,
+     "specificity": 0.7391594396264176,
+     "precision_image": 0.6422689844464776,
+     "box_recall": 0.5298223350253807,
+     "box_precision": 0.5048367593712213,
+     "mean_iou_matched": 0.659550316566255,
+     "small_box_recall": 0.18902439024390244
+    },
+    "PA": {
+     "images": 2916,
+     "rsna_metric": 0.1389735772357724,
+     "sensitivity": 0.45054945054945056,
+     "specificity": 0.9481649640559969,
+     "precision_image": 0.47307692307692306,
+     "box_recall": 0.3261455525606469,
+     "box_precision": 0.4019933554817276,
+     "mean_iou_matched": 0.6708325004026247,
+     "small_box_recall": 0.16243654822335024
+    }
+   },
+   "sex": {
+    "F": {
+     "images": 2396,
+     "rsna_metric": 0.2143125268125268,
+     "sensitivity": 0.720754716981132,
+     "specificity": 0.867631296891747,
+     "precision_image": 0.6073131955484896,
+     "box_recall": 0.5069284064665127,
+     "box_precision": 0.4803063457330416,
+     "mean_iou_matched": 0.6699405191120925,
+     "small_box_recall": 0.15555555555555556
+    },
+    "M": {
+     "images": 2953,
+     "rsna_metric": 0.19792319067501735,
+     "sensitivity": 0.654357459379616,
+     "specificity": 0.8765377855887522,
+     "precision_image": 0.611878453038674,
+     "box_recall": 0.4782608695652174,
+     "box_precision": 0.4966378482228626,
+     "mean_iou_matched": 0.6533681992095381,
+     "small_box_recall": 0.20320855614973263
+    }
+   },
+   "age": {
+    "0-20": {
+     "images": 419,
+     "rsna_metric": 0.18318736730360935,
+     "sensitivity": 0.6220472440944882,
+     "specificity": 0.8972602739726028,
+     "precision_image": 0.7247706422018348,
+     "box_recall": 0.3681592039800995,
+     "box_precision": 0.5034013605442177,
+     "mean_iou_matched": 0.6580477993771502,
+     "small_box_recall": 0.1875
+    },
+    "21-40": {
+     "images": 1426,
+     "rsna_metric": 0.2593962585034015,
+     "sensitivity": 0.7277777777777777,
+     "specificity": 0.8780487804878049,
+     "precision_image": 0.6683673469387755,
+     "box_recall": 0.5682210708117443,
+     "box_precision": 0.5623931623931624,
+     "mean_iou_matched": 0.6720068773929436,
+     "small_box_recall": 0.1951219512195122
+    },
+    "41-60": {
+     "images": 2218,
+     "rsna_metric": 0.198915059347181,
+     "sensitivity": 0.6815144766146993,
+     "specificity": 0.8728094968908988,
+     "precision_image": 0.576271186440678,
+     "box_recall": 0.5041436464088398,
+     "box_precision": 0.46496815286624205,
+     "mean_iou_matched": 0.6594269647333334,
+     "small_box_recall": 0.1885245901639344
+    },
+    "61-80": {
+     "images": 1246,
+     "rsna_metric": 0.16262860082304528,
+     "sensitivity": 0.6679245283018868,
+     "specificity": 0.8572884811416922,
+     "precision_image": 0.5583596214511041,
+     "box_recall": 0.4295612009237875,
+     "box_precision": 0.4295612009237875,
+     "mean_iou_matched": 0.6470218874743794,
+     "small_box_recall": 0.16292134831460675
+    },
+    ">80": {
+     "images": 40,
+     "rsna_metric": 0.037037037037037035,
+     "sensitivity": 0.16666666666666666,
+     "specificity": 0.9117647058823529,
+     "precision_image": 0.25,
+     "box_recall": 0.2,
+     "box_precision": 0.4,
+     "mean_iou_matched": 0.5362669337256594,
+     "small_box_recall": 0.0
+    }
+   },
+   "n_boxes": {
+    "0": {
+     "images": 4142,
+     "rsna_metric": 0.0,
+     "sensitivity": NaN,
+     "specificity": 0.8725253500724288,
+     "precision_image": 0.0,
+     "box_recall": NaN,
+     "box_precision": 0.0,
+     "mean_iou_matched": NaN,
+     "small_box_recall": NaN
+    },
+    "1": {
+     "images": 504,
+     "rsna_metric": 0.2183779761904762,
+     "sensitivity": 0.5158730158730159,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.38492063492063494,
+     "box_precision": 0.5843373493975904,
+     "mean_iou_matched": 0.6416235673557668,
+     "small_box_recall": 0.22265625
+    },
+    "2": {
+     "images": 669,
+     "rsna_metric": 0.36104260089686074,
+     "sensitivity": 0.7997010463378177,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.5523168908819133,
+     "box_precision": 0.8094194961664841,
+     "mean_iou_matched": 0.6662875743150097,
+     "small_box_recall": 0.17079889807162535
+    },
+    "3": {
+     "images": 31,
+     "rsna_metric": 0.1334005376344086,
+     "sensitivity": 0.8709677419354839,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.22580645161290322,
+     "box_precision": 0.5121951219512195,
+     "mean_iou_matched": 0.644720561149395,
+     "small_box_recall": 0.0967741935483871
+    },
+    "4": {
+     "images": 3,
+     "rsna_metric": 0.13194444444444445,
+     "sensitivity": 1.0,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.16666666666666666,
+     "box_precision": 0.3333333333333333,
+     "mean_iou_matched": 0.7473128057960368,
+     "small_box_recall": 0.0
+    }
+   },
+   "opacity_size_box_recall": {
+    "medium": {
+     "boxes": 590,
+     "recall": 0.5033898305084745
+    },
+    "large": {
+     "boxes": 668,
+     "recall": 0.7994011976047904
+    },
+    "small": {
+     "boxes": 689,
+     "recall": 0.18142235123367198
+    }
+   },
+   "false_positive_rate_by_detailed_class": {
+    "No Lung Opacity / Not Normal": {
+     "images": 2414,
+     "fp_rate": 0.21582435791217897
+    },
+    "Normal": {
+     "images": 1728,
+     "fp_rate": 0.004050925925925926
+    }
+   }
+  },
+  "B": {
+   "view": {
+    "AP": {
+     "images": 2433,
+     "rsna_metric": 0.24559359067734898,
+     "sensitivity": 0.791220556745182,
+     "specificity": 0.7071380920613742,
+     "precision_image": 0.6273344651952462,
+     "box_recall": 0.557741116751269,
+     "box_precision": 0.49409780775716694,
+     "mean_iou_matched": 0.6761314492004781,
+     "small_box_recall": 0.18292682926829268
+    },
+    "PA": {
+     "images": 2916,
+     "rsna_metric": 0.13162878787878787,
+     "sensitivity": 0.43956043956043955,
+     "specificity": 0.9451381006432085,
+     "precision_image": 0.4528301886792453,
+     "box_recall": 0.32075471698113206,
+     "box_precision": 0.3814102564102564,
+     "mean_iou_matched": 0.6600810572183264,
+     "small_box_recall": 0.15736040609137056
+    }
+   },
+   "sex": {
+    "F": {
+     "images": 2396,
+     "rsna_metric": 0.226335403726708,
+     "sensitivity": 0.7283018867924528,
+     "specificity": 0.852625937834941,
+     "precision_image": 0.583963691376702,
+     "box_recall": 0.5288683602771362,
+     "box_precision": 0.47167868177136973,
+     "mean_iou_matched": 0.6804778587936273,
+     "small_box_recall": 0.16825396825396827
+    },
+    "M": {
+     "images": 2953,
+     "rsna_metric": 0.2130028735632183,
+     "sensitivity": 0.6986706056129985,
+     "specificity": 0.8642355008787346,
+     "precision_image": 0.6048593350383632,
+     "box_recall": 0.49953746530989823,
+     "box_precision": 0.48214285714285715,
+     "mean_iou_matched": 0.6689080191272584,
+     "small_box_recall": 0.18181818181818182
+    }
+   },
+   "age": {
+    "0-20": {
+     "images": 419,
+     "rsna_metric": 0.22059599156118143,
+     "sensitivity": 0.6929133858267716,
+     "specificity": 0.8938356164383562,
+     "precision_image": 0.7394957983193278,
+     "box_recall": 0.4527363184079602,
+     "box_precision": 0.5416666666666666,
+     "mean_iou_matched": 0.6539770404189037,
+     "small_box_recall": 0.23958333333333334
+    },
+    "21-40": {
+     "images": 1426,
+     "rsna_metric": 0.2792935494433531,
+     "sensitivity": 0.7527777777777778,
+     "specificity": 0.8602251407129456,
+     "precision_image": 0.6452380952380953,
+     "box_recall": 0.5906735751295337,
+     "box_precision": 0.5516129032258065,
+     "mean_iou_matched": 0.6914068294873147,
+     "small_box_recall": 0.2073170731707317
+    },
+    "41-60": {
+     "images": 2218,
+     "rsna_metric": 0.20559933142311365,
+     "sensitivity": 0.7015590200445434,
+     "specificity": 0.8592425098925947,
+     "precision_image": 0.5585106382978723,
+     "box_recall": 0.5179558011049724,
+     "box_precision": 0.44802867383512546,
+     "mean_iou_matched": 0.6690276295616241,
+     "small_box_recall": 0.1557377049180328
+    },
+    "61-80": {
+     "images": 1246,
+     "rsna_metric": 0.17102771132376393,
+     "sensitivity": 0.6943396226415094,
+     "specificity": 0.8440366972477065,
+     "precision_image": 0.5459940652818991,
+     "box_recall": 0.4341801385681293,
+     "box_precision": 0.4069264069264069,
+     "mean_iou_matched": 0.6651566816475929,
+     "small_box_recall": 0.14606741573033707
+    },
+    ">80": {
+     "images": 40,
+     "rsna_metric": 0.026041666666666664,
+     "sensitivity": 0.16666666666666666,
+     "specificity": 0.9411764705882353,
+     "precision_image": 0.3333333333333333,
+     "box_recall": 0.2,
+     "box_precision": 0.5,
+     "mean_iou_matched": 0.480663029031387,
+     "small_box_recall": 0.0
+    }
+   },
+   "n_boxes": {
+    "0": {
+     "images": 4142,
+     "rsna_metric": 0.0,
+     "sensitivity": NaN,
+     "specificity": 0.859005311443747,
+     "precision_image": 0.0,
+     "box_recall": NaN,
+     "box_precision": 0.0,
+     "mean_iou_matched": NaN,
+     "small_box_recall": NaN
+    },
+    "1": {
+     "images": 504,
+     "rsna_metric": 0.24656911375661378,
+     "sensitivity": 0.5535714285714286,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.41865079365079366,
+     "box_precision": 0.6045845272206304,
+     "mean_iou_matched": 0.6448435102860931,
+     "small_box_recall": 0.23828125
+    },
+    "2": {
+     "images": 669,
+     "rsna_metric": 0.3942513702042849,
+     "sensitivity": 0.820627802690583,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.5710014947683109,
+     "box_precision": 0.8033648790746583,
+     "mean_iou_matched": 0.6835298089177912,
+     "small_box_recall": 0.15151515151515152
+    },
+    "3": {
+     "images": 31,
+     "rsna_metric": 0.12930107526881718,
+     "sensitivity": 0.9032258064516129,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.23655913978494625,
+     "box_precision": 0.5116279069767442,
+     "mean_iou_matched": 0.631454520284612,
+     "small_box_recall": 0.08064516129032258
+    },
+    "4": {
+     "images": 3,
+     "rsna_metric": 0.0625,
+     "sensitivity": 1.0,
+     "specificity": NaN,
+     "precision_image": 1.0,
+     "box_recall": 0.08333333333333333,
+     "box_precision": 0.2,
+     "mean_iou_matched": 0.698435526381136,
+     "small_box_recall": 0.0
+    }
+   },
+   "opacity_size_box_recall": {
+    "medium": {
+     "boxes": 590,
+     "recall": 0.5474576271186441
+    },
+    "large": {
+     "boxes": 668,
+     "recall": 0.8293413173652695
+    },
+    "small": {
+     "boxes": 689,
+     "recall": 0.17561683599419448
+    }
+   },
+   "false_positive_rate_by_detailed_class": {
+    "No Lung Opacity / Not Normal": {
+     "images": 2414,
+     "fp_rate": 0.23777961888980945
+    },
+    "Normal": {
+     "images": 1728,
+     "fp_rate": 0.005787037037037037
+    }
+   }
+  }
+ },
+ "code_commit": "afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411"
+}

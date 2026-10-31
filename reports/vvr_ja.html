@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Version Verification Record（バージョン検証記録） — RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</title>
+<style>
+  :root { --fg:#1d232a; --muted:#5b6672; --line:#d5dbe1; --bg-alt:#f4f6f8;
+          --ok:#1f6f3f; --ok-bg:#e4f3ea; --ko:#a32222; --ko-bg:#fbe7e7; --inc:#8a5a00; --inc-bg:#fdf1d8; }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+         color: var(--fg); max-width: 1100px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  h2 { font-size: 1.15rem; margin: 32px 0 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 1rem; margin: 16px 0 6px; }
+  .muted, .note { color: var(--muted); }
+  .note { font-size: .85rem; }
+  code, .mono { font-family: ui-monospace, Consolas, monospace; font-size: .85rem; word-break: break-all; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: .9rem; }
+  th, td { border: 1px solid var(--line); padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: var(--bg-alt); font-weight: 600; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .state { display: inline-block; padding: 1px 8px; border-radius: 4px; font-weight: 700; font-size: .85rem; }
+  .SATISFIED { color: var(--ok); background: var(--ok-bg); }
+  .NOT_SATISFIED { color: var(--ko); background: var(--ko-bg); }
+  .INCONCLUSIVE { color: var(--inc); background: var(--inc-bg); }
+  .banner { border: 1px solid var(--line); border-left: 5px solid var(--inc); background: var(--inc-bg);
+            padding: 8px 12px; margin: 12px 0; }
+  .disclaimer { border-left-color: var(--muted); background: var(--bg-alt); }
+  .decision { border: 1px solid var(--line); padding: 12px 16px; margin: 16px 0; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0; }
+  dt { font-weight: 600; } dd { margin: 0; }
+  nav ol { columns: 2; font-size: .9rem; }
+  .not-provided { color: var(--muted); font-style: italic; }
+  @media print { nav { display: none; } h2 { break-after: avoid; } table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="muted">Version Verification Record（バージョン検証記録） · MedVision QA 0.0.1</p>
+  <h1>RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</h1>
+  <p class="muted">実行 ID <code>5ab49538-a296-4dd5-9647-eecf2c646647</code> · 2026-10-31T06:14:45+00:00</p>
+  <div class="banner disclaimer">技術評価のための文書である。臨床的妥当性確認、認証、規制適合の証明のいずれでもない。第 21 節を参照。</div>
+  <div class="decision">
+    <strong>総合判定:</strong> <span class="state SATISFIED">SATISFIED（基準充足）</span> — 3 件の基準をすべて満たしている
+    <div class="note">集約規則: NOT_SATISFIED の基準が 1 つでもあれば NOT_SATISFIED。そうでなく、INCONCLUSIVE の基準が 1 つでもあれば INCONCLUSIVE。すべての基準が SATISFIED の場合に限り SATISFIED。</div>
+  </div>
+</header>
+
+<nav><ol>
+<li><a href="#s1">レポートおよび実行の識別子</a></li><li><a href="#s2">評価日時</a></li><li><a href="#s3">目的と比較の概要</a></li><li><a href="#s4">比較対象バージョンの識別子</a></li><li><a href="#s5">コード、コミット、重み、ハッシュ</a></li><li><a href="#s6">データセットのマニフェスト</a></li><li><a href="#s7">ファイルの来歴</a></li><li><a href="#s8">前処理、設定、依存パッケージ、乱数シード</a></li><li><a href="#s9">クラスとクラスの順序</a></li><li><a href="#s10">データ検証の概要</a></li><li><a href="#s11">指標と定義</a></li><li><a href="#s12">混同行列</a></li><li><a href="#s13">信頼区間とパラメーター</a></li><li><a href="#s14">統計的検定、前提、限界</a></li><li><a href="#s15">分析前に定めた受入基準</a></li><li><a href="#s16">各基準の状態と総合判定</a></li><li><a href="#s17">サンプルサイズの根拠</a></li><li><a href="#s18">頑健性試験の結果</a></li><li><a href="#s19">利用できない項目・実施していない項目</a></li><li><a href="#s20">分析の限界</a></li><li><a href="#s21">What This Report Cannot Establish（本レポートで立証できないこと）</a></li></ol></nav>
+
+<h2 id="s1">1. レポートおよび実行の識別子</h2>
+<dl>
+  <dt>実行 ID</dt><dd><code>5ab49538-a296-4dd5-9647-eecf2c646647</code> （本レポートの識別子を兼ねる）</dd>
+  <dt>設定ファイル</dt><dd><code>config.toml</code> — SHA-256 <code>2fafeead7bdcf70fba24c92c2a4d1b16c32efcb636e06ec2f16bf06782445c21</code></dd>
+</dl>
+
+<h2 id="s2">2. 評価日時</h2>
+<p>2026-10-31T06:14:45+00:00 （UTC、実行開始時刻）</p>
+
+<h2 id="s3">3. 目的と比較の概要</h2>
+<dl>
+  <dt>タイトル</dt><dd>RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</dd>
+  <dt>目的</dt><dd>Check, on the patient-disjoint test split, that reducing the input resolution from 512 to 384 px (about 1.4 times faster training in float32 on the GTX 1650) does not make the image-level detection of lung opacity worse: AUROC, sensitivity and specificity of B not inferior to A.</dd>
+  <dt>種別</dt><dd>対応のある比較: 同一の 5349 症例で B（候補）を A（基準）と比較</dd>
+</dl>
+
+<h2 id="s4">4. 比較対象バージョンの識別子</h2>
+<table>
+  <tr><th>役割</th><th>識別子</th><th>説明</th><th>スコアの有無</th></tr>
+  <tr><td>A — 基準</td><td><code>frcnn-r50-fpn-512</code></td>
+      <td>torchvision fasterrcnn_resnet50_fpn, COCO_V1 weights, 2-class head, trainable_backbone_layers = 3. score_opacity = max box score mapped so that the validation-chosen threshold tau maps to 0.5 (PROTOCOL.md §7.4)</td><td>あり</td></tr>
+  <tr><td>B — 候補</td><td><code>frcnn-r50-fpn-384</code></td>
+      <td>Same model, recipe, seed and budget as A; only change: min_size = max_size = 384. Same score mapping with its own validation-chosen tau</td><td>あり</td></tr>
+</table>
+
+<h2 id="s5">5. コード、コミット、重み、ハッシュ</h2>
+<table>
+  <tr><th>バージョン</th><th>コードのコミット</th><th>重みの SHA-256</th></tr>
+  <tr><td>A</td><td class="mono">afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411</td><td class="mono">c549004887baad79659ca5a220a1931e49d1a051bda72f9cc561684c8c683c3b</td></tr>
+  <tr><td>B</td><td class="mono">afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411</td><td class="mono">462f1b293bbca8deda6489c8bd4c1a2cb663530f01e28238cf4ce809ab4cd4c2</td></tr>
+</table>
+<p class="note">設定ファイルで申告された値であり、本ツールでは検証していない（重みファイルは読み込まない）。</p>
+
+<h2 id="s6">6. データセットのマニフェスト</h2>
+<dl>
+  <dt>説明</dt><dd>RSNA Pneumonia Detection Challenge (Kaggle, stage 2 train), 26,684 frontal chest radiographs from NIH ChestX-ray14. Test split = 5,349 images (1,207 with opacity) of 2,290 NIH patients, drawn by patient (seed 20261030); no patient shared with training or validation. Split: metadata/split.csv, SHA-256 9ec285f5399c198c1d0cd23f1e5b3a9e9b99cee3ab18bccd473115fd4cb7040c. manifest_sha256 = metadata/raw_manifest.csv (SHA-256 of every downloaded file).</dd>
+  <dt>データの種類</dt><dd>実臨床データ（利用者による申告）</dd>
+  <dt>マニフェストの SHA-256</dt><dd class="mono">9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12af7</dd>
+</dl>
+
+<h2 id="s7">7. ファイルの来歴</h2>
+<table>
+  <tr><th>役割</th><th>ファイル（設定ファイルからの相対パス）</th><th>SHA-256（計算値）</th><th>行数</th></tr>
+  <tr><td>正解データ</td><td><code>medvision/ground_truth.csv</code></td><td class="mono">cd95773d0cf7b5a85424bc83a6a64d54f44e03eeeeb3dd0c1eb710b06fabf7c8</td><td class="num">5349</td></tr>
+  <tr><td>予測（バージョン A）</td><td><code>medvision/preds_r50_512.csv</code></td><td class="mono">1ddb8f5a7a8176d4106caa880541eeb3207d36691e13ff1c14b63b797c1cd0ad</td><td class="num">5349</td></tr>
+  <tr><td>予測（バージョン B）</td><td><code>medvision/preds_r50_384.csv</code></td><td class="mono">5971ea0b6318b68840d368687f58bfddcd4687229bde1898220b262ee2d17f47</td><td class="num">5349</td></tr>
+</table>
+<p class="note">未提供の項目は第 19 節にまとめている。</p>
+
+<h2 id="s8">8. 前処理、設定、依存パッケージ、乱数シード</h2>
+<table>
+  <tr><th>バージョン</th><th>申告された前処理</th></tr>
+<tr><td>A</td><td>DICOM (uint8, 1024 px) -&gt; 512 px PNG (PIL BOX, area average); [0, 1], repeated on 3 channels; ImageNet normalisation inside the model; fed at 512 px (no resize)</td></tr><tr><td>B</td><td>Same 512 px PNG; resized to 384 px inside the model (bilinear, torchvision GeneralizedRCNNTransform); boxes returned in 512 px coordinates</td></tr></table>
+<dl>
+  <dt>乱数シード</dt><dd>20261030</dd>
+  <dt>スコア合計の許容誤差</dt><dd>0.001</dd>
+  <dt>Python</dt><dd>3.12.6</dd>
+  <dt>依存パッケージ</dt><dd><code>medvision-qa==0.0.1</code>, <code>numpy==2.5.4</code>, <code>scipy==1.18.1</code>, <code>scikit-learn==1.9.1</code>, <code>jinja2==3.1.6</code></dd>
+</dl>
+
+<h2 id="s9">9. クラスとクラスの順序</h2>
+<dl>
+  <dt>宣言された順序</dt><dd><code>0: no_opacity</code>, <code>1: opacity</code></dd>
+  <dt>派生二値タスク</dt><dd>陽性 = opacity、陰性 = no_opacity</dd>
+</dl>
+
+<h2 id="s10">10. データ検証の概要</h2>
+<p>正解データのモード: <code>separate_file</code>. case_id による厳密な照合: 5349 症例、すべてのファイルで一致。行の削除・修正・置換は一切行っていない。</p>
+<table>
+  <tr><th>ファイル</th><th>実施したチェック（すべて合格）</th></tr>
+  <tr><td>正解データ</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, patient_id_present</td></tr>
+  <tr><td>予測（バージョン A）</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, score_columns_complete, score_numeric, score_finite, score_in_bounds, score_sum_to_one(tol=0.001), predicted_is_argmax</td></tr>
+  <tr><td>予測（バージョン B）</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, score_columns_complete, score_numeric, score_finite, score_in_bounds, score_sum_to_one(tol=0.001), predicted_is_argmax</td></tr>
+</table>
+
+<h2 id="s11">11. 指標と定義</h2>
+<table>
+  <tr><th rowspan="2">指標</th><th colspan="2">バージョン A</th><th colspan="2">バージョン B</th><th rowspan="2">備考</th></tr>
+  <tr><th>推定値</th><th>95.0% 信頼区間</th><th>推定値</th><th>95.0% 信頼区間</th></tr>
+  <tr><td><code>accuracy</code></td>
+<td class="num">0.8299</td><td class="num">[0.8159, 0.8434]</td><td class="num">0.8258</td><td class="num">[0.8122, 0.8396]</td>    <td class="note"></td></tr>
+  <tr><td><code>macro_f1</code></td>
+<td class="num">0.7664</td><td class="num">[0.7451, 0.7859]</td><td class="num">0.7662</td><td class="num">[0.7461, 0.7855]</td>    <td class="note"></td></tr>
+  <tr><td><code>precision[no_opacity]</code></td>
+<td class="num">0.9044</td><td class="num">[0.8919, 0.9163]</td><td class="num">0.9109</td><td class="num">[0.8993, 0.9222]</td>    <td class="note"></td></tr>
+  <tr><td><code>precision[opacity]</code></td>
+<td class="num">0.6098</td><td class="num">[0.5682, 0.6482]</td><td class="num">0.5953</td><td class="num">[0.5548, 0.6342]</td>    <td class="note"></td></tr>
+  <tr><td><code>recall[no_opacity]</code></td>
+<td class="num">0.8725</td><td class="num">[0.8567, 0.8887]</td><td class="num">0.8590</td><td class="num">[0.8422, 0.8754]</td>    <td class="note"></td></tr>
+  <tr><td><code>recall[opacity]</code></td>
+<td class="num">0.6835</td><td class="num">[0.6344, 0.7279]</td><td class="num">0.7117</td><td class="num">[0.6659, 0.7534]</td>    <td class="note"></td></tr>
+  <tr><td><code>f1[no_opacity]</code></td>
+<td class="num">0.8882</td><td class="num">[0.8773, 0.8989]</td><td class="num">0.8842</td><td class="num">[0.8733, 0.8949]</td>    <td class="note"></td></tr>
+  <tr><td><code>f1[opacity]</code></td>
+<td class="num">0.6445</td><td class="num">[0.6051, 0.6816]</td><td class="num">0.6483</td><td class="num">[0.6090, 0.6839]</td>    <td class="note"></td></tr>
+  <tr><td><code>sensitivity</code></td>
+<td class="num">0.6835</td><td class="num">[0.6344, 0.7279]</td><td class="num">0.7117</td><td class="num">[0.6659, 0.7534]</td>    <td class="note"></td></tr>
+  <tr><td><code>specificity</code></td>
+<td class="num">0.8725</td><td class="num">[0.8567, 0.8887]</td><td class="num">0.8590</td><td class="num">[0.8422, 0.8754]</td>    <td class="note"></td></tr>
+  <tr><td><code>auroc</code></td>
+<td class="num">0.8883</td><td class="num">[0.8746, 0.9018]</td><td class="num">0.8889</td><td class="num">[0.8748, 0.9024]</td>    <td class="note"></td></tr>
+</table>
+<h3>定義</h3>
+<dl><dt><code>accuracy</code></dt><dd>predicted_label が true_label と一致した症例の割合。</dd><dt><code>precision</code></dt><dd>クラスごとの TP / (TP + FP)（一対他）。そのクラスが一度も予測されない場合は未定義。</dd><dt><code>recall</code></dt><dd>クラスごとの TP / (TP + FN)（一対他）。そのクラスが正解ラベルに存在しない場合は未定義。</dd><dt><code>f1</code></dt><dd>クラスごとの 2·TP / (2·TP + FP + FN)。そのクラスが正解ラベルにも予測にも存在しない場合は未定義。</dd><dt><code>macro_f1</code></dt><dd>宣言された全クラスの F1 の単純平均（重み付けなし）。いずれかの F1 が未定義なら未定義。</dd><dt><code>sensitivity</code></dt><dd>派生二値タスクの TP / (TP + FN)。陽性クラスが宣言されていない場合、または陽性症例がない場合は未定義。</dd><dt><code>specificity</code></dt><dd>派生二値タスクの TN / (TN + FP)。陽性クラスが宣言されていない場合、または陰性症例がない場合は未定義。</dd><dt><code>auroc</code></dt><dd>派生二値タスク。陽性スコアは陽性クラスのスコアの合計。Mann-Whitney 統計量で計算し、同順位は 1/2 として数える。スコアがない場合、陽性クラスが宣言されていない場合、または二値クラスの一方しか存在しない場合は未定義。</dd></dl>
+
+<h2 id="s12">12. 混同行列</h2>
+<p class="note">行 = 正解、列 = 予測。</p>
+<h3>バージョン A</h3>
+<table>
+  <tr><th></th><th>no_opacity</th><th>opacity</th></tr>
+<tr><th>no_opacity</th><td class="num">3614</td><td class="num">528</td></tr><tr><th>opacity</th><td class="num">382</td><td class="num">825</td></tr></table>
+<h3>バージョン B</h3>
+<table>
+  <tr><th></th><th>no_opacity</th><th>opacity</th></tr>
+<tr><th>no_opacity</th><td class="num">3558</td><td class="num">584</td></tr><tr><th>opacity</th><td class="num">348</td><td class="num">859</td></tr></table>
+
+<h2 id="s13">13. 信頼区間とパラメーター</h2>
+<dl>
+  <dt>手法</dt><dd>パーセンタイル ブートストラップ（両側、分位点の計算法: 線形補間）</dd>
+  <dt>信頼水準</dt><dd>0.95</dd>
+  <dt>リサンプリング回数</dt><dd>2000</dd>
+  <dt>乱数シード</dt><dd>20261030</dd>
+  <dt>リサンプリング単位</dt><dd>患者（2290 単位）</dd>
+</dl>
+<p class="note">区間は、指標が全標本およびすべてのリサンプルで定義される場合にのみ算出する。</p>
+
+<h2 id="s14">14. 統計的検定、前提、限界</h2>
+<h3>対応のある差 Δ = B − A（対応のあるブートストラップ。A と B に同じ抽出を使用）</h3>
+<table>
+  <tr><th>指標</th><th>Δ</th><th>信頼区間</th><th>備考</th></tr>
+  <tr><td><code>accuracy</code></td><td class="num">-0.0041</td><td class="num">[-0.0107, 0.0031]</td><td class="note"></td></tr>
+  <tr><td><code>macro_f1</code></td><td class="num">-0.0001</td><td class="num">[-0.0091, 0.0101]</td><td class="note"></td></tr>
+  <tr><td><code>precision[no_opacity]</code></td><td class="num">0.0065</td><td class="num">[0.0010, 0.0128]</td><td class="note"></td></tr>
+  <tr><td><code>precision[opacity]</code></td><td class="num">-0.0145</td><td class="num">[-0.0277, -0.0003]</td><td class="note"></td></tr>
+  <tr><td><code>recall[no_opacity]</code></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td class="note"></td></tr>
+  <tr><td><code>recall[opacity]</code></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td class="note"></td></tr>
+  <tr><td><code>f1[no_opacity]</code></td><td class="num">-0.0040</td><td class="num">[-0.0085, 0.0009]</td><td class="note"></td></tr>
+  <tr><td><code>f1[opacity]</code></td><td class="num">0.0038</td><td class="num">[-0.0102, 0.0198]</td><td class="note"></td></tr>
+  <tr><td><code>sensitivity</code></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td class="note"></td></tr>
+  <tr><td><code>specificity</code></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td class="note"></td></tr>
+  <tr><td><code>auroc</code></td><td class="num">0.0006</td><td class="num">[-0.0027, 0.0038]</td><td class="note"></td></tr>
+</table>
+<h3>マクネマー検定（参考値。判定には使用しない）</h3>
+<dl>
+  <dt>手法</dt><dd>正確条件付きマクネマー検定（不一致ペアに対する両側二項検定）</dd>
+  <dt>ペア</dt><dd>両方正解: 4270 · A のみ正解: 169 · B のみ正解: 147 · 両方不正解: 763</dd>
+  <dt>p 値</dt><dd>適用不可 — 患者あたり複数の症例があるためペアが独立ではなく、マクネマー検定の前提を満たさない</dd>
+</dl>
+<p class="note">前提: ペアが互いに独立であること。p 値が大きくても、同等性や性能低下がないことの証明にはならず、p 値が小さくても、差の実用上・臨床上の重要性を示すものではない。</p>
+<h3>DeLong 法</h3>
+<p>未実装。検証に使える独立した参照実装（R/pROC）がないため。AUROC の差は対応のあるブートストラップで推定している</p>
+
+<h2 id="s15">15. 分析前に定めた受入基準</h2>
+<table>
+  <tr><th>ID</th><th>説明</th><th>種別</th><th>評価対象</th><th>パラメーター</th></tr>
+  <tr><td>C1</td><td>Image-level AUROC (opacity vs none) of B not inferior to A, margin 0.02</td><td><code>non_inferiority</code></td><td><code>auroc (B − A)</code></td><td>マージン 0.0200</td></tr>
+  <tr><td>C2</td><td>Image-level sensitivity of B at its tau not inferior to A at its tau, margin 0.05</td><td><code>non_inferiority</code></td><td><code>sensitivity (B − A)</code></td><td>マージン 0.0500</td></tr>
+  <tr><td>C3</td><td>Image-level specificity of B at its tau not inferior to A at its tau, margin 0.05</td><td><code>non_inferiority</code></td><td><code>specificity (B − A)</code></td><td>マージン 0.0500</td></tr>
+</table>
+<p class="note">本ツールでは、基準が分析前に定められたことを証明できない。設定ファイルのハッシュをバージョン履歴（git など）と照合すること。設定ファイルの SHA-256: <code>2fafeead7bdcf70fba24c92c2a4d1b16c32efcb636e06ec2f16bf06782445c21</code></p>
+
+<h2 id="s16">16. 各基準の状態と総合判定</h2>
+<table>
+  <tr><th>ID</th><th>状態</th><th>推定値</th><th>信頼区間</th><th>根拠</th></tr>
+  <tr><td>C1</td><td><span class="state SATISFIED">SATISFIED（基準充足）</span></td><td class="num">0.0006</td><td class="num">[-0.0027, 0.0038]</td><td>信頼区間 [-0.0027, 0.0038]: 下限が −マージン（-0.0200）を上回る</td></tr>
+  <tr><td>C2</td><td><span class="state SATISFIED">SATISFIED（基準充足）</span></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td>信頼区間 [0.0084, 0.0512]: 下限が −マージン（-0.0500）を上回る</td></tr>
+  <tr><td>C3</td><td><span class="state SATISFIED">SATISFIED（基準充足）</span></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td>信頼区間 [-0.0202, -0.0068]: 下限が −マージン（-0.0500）を上回る</td></tr>
+</table>
+<p><strong>総合判定:</strong> <span class="state SATISFIED">SATISFIED（基準充足）</span> — 3 件の基準をすべて満たしている</p>
+<p class="note">NOT_SATISFIED の基準が 1 つでもあれば NOT_SATISFIED。そうでなく、INCONCLUSIVE の基準が 1 つでもあれば INCONCLUSIVE。すべての基準が SATISFIED の場合に限り SATISFIED。 区間が未定義または幅ゼロの場合、その基準は INCONCLUSIVE とする。</p>
+
+<h2 id="s17">17. サンプルサイズの根拠</h2>
+<dl>
+  <dt>実際のサンプルサイズ</dt><dd>5349 症例、2290 患者</dd>
+  <dt>根拠</dt><dd>データの入手可能性に基づく</dd>
+<dt>記載内容</dt><dd>Size set by the public dataset and the 70/10/20 patient-level split fixed in Step 2 (commit abfc675). No power calculation was done.</dd></dl>
+<div class="banner">データの入手可能性で決まったサンプルサイズは、統計的な根拠にはならない。</div>
+<h2 id="s18">18. 頑健性試験の結果</h2>
+<p>未実施: 本バージョンのツールには頑健性試験の機能がない。</p>
+
+<h2 id="s19">19. 利用できない項目・実施していない項目</h2>
+<ul><li>マクネマー検定: 適用不可（患者あたり複数の症例があるためペアが独立ではなく、マクネマー検定の前提を満たさない）</li><li>DeLong 法: 未実装。検証に使える独立した参照実装（R/pROC）がないため。AUROC の差は対応のあるブートストラップで推定している</li><li>頑健性試験: 未実施（本バージョンのツールでは未対応）</li></ul>
+
+<h2 id="s20">20. 分析の限界</h2>
+<ul><li>パーセンタイル・ブートストラップ: 標本が小さい場合や指標が 0 または 1 に近い場合、実際の被覆確率が名目水準を下回ることがある。</li><li>3 件の基準を、多重性の調整なしで評価している。</li><li>本ツールでは、基準が分析前に定められたことを証明できない。設定ファイルのハッシュを外部の履歴（git）と照合すれば確認できる。</li><li>照合で確認しているのは症例 ID の一貫性であり、すべてのバージョンで同じ画像を指していることまでは確認していない。</li><li>指標は多クラス判定（argmax）に基づいて計算しており、別の判定閾値は評価していない。</li></ul>
+
+<h2 id="s21">21. What This Report Cannot Establish（本レポートで立証できないこと）</h2>
+<ul><li>有意でない結果は、性能低下がないこと、同等性、非劣性のいずれも証明しない。</li><li>本分析は臨床的妥当性確認ではなく、臨床上の安全性を示すものでもない。</li><li>本レポートは、ISO 13485、FDA QMSR、その他いかなる規制への適合も証明しない。</li><li>合成データによる感度試験は、実際の臨床撮像条件での妥当性を示すものではない。</li><li>準重複の検出だけでは、データリークも患者の同一性も証明されない。</li><li>結論は、実際に使用したデータ、プロトコル、仮定、手法の範囲に限られる。</li></ul>
+
+<footer class="note"><p>MedVision QA 0.0.1 により生成。外部リソースおよびスクリプトを含まない自己完結型のレポート。</p></footer>
+</body>
+</html>

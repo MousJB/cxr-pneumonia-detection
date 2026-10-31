@@ -6,6 +6,7 @@ MedVision QA loader and evaluation are used (pinned in requirements.txt).
 """
 
 import csv
+import json
 import re
 import shutil
 import tomllib
@@ -70,8 +71,14 @@ def test_config_loads_with_medvision_validator(staged_config):
     ]
     assert (cfg.confidence_level, cfg.bootstrap_resamples, cfg.seed) == (0.95, 2000, 20261030)
     assert cfg.manifest_sha256 == "9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12af7"
-    # Metadata stay empty until training: never guessed.
-    assert all(v.code_commit == "" and v.weights_sha256 == "" for v in cfg.versions.values())
+    # Metadata are empty until the test evaluation fills them from the training logs: never guessed.
+    selection = ROOT / "results" / "validation_selection.json"
+    for name, v in cfg.versions.items():
+        if v.code_commit == "" and v.weights_sha256 == "":
+            continue
+        assert re.fullmatch(r"[0-9a-f]{40}", v.code_commit)
+        assert v.weights_sha256 == json.loads(selection.read_text(encoding="utf-8"))["training"][name][
+            "best_weights_sha256"]
 
 
 def test_full_evaluation_runs_on_synthetic_csv(staged_config):

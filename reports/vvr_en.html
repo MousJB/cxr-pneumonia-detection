@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Version Verification Record — RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</title>
+<style>
+  :root { --fg:#1d232a; --muted:#5b6672; --line:#d5dbe1; --bg-alt:#f4f6f8;
+          --ok:#1f6f3f; --ok-bg:#e4f3ea; --ko:#a32222; --ko-bg:#fbe7e7; --inc:#8a5a00; --inc-bg:#fdf1d8; }
+  * { box-sizing: border-box; }
+  body { font: 15px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, "Hiragino Sans", "Yu Gothic UI", Meiryo, sans-serif;
+         color: var(--fg); max-width: 1100px; margin: 0 auto; padding: 24px; }
+  h1 { font-size: 1.6rem; margin: 0 0 4px; }
+  h2 { font-size: 1.15rem; margin: 32px 0 8px; padding-top: 8px; border-top: 1px solid var(--line); }
+  h3 { font-size: 1rem; margin: 16px 0 6px; }
+  .muted, .note { color: var(--muted); }
+  .note { font-size: .85rem; }
+  code, .mono { font-family: ui-monospace, Consolas, monospace; font-size: .85rem; word-break: break-all; }
+  table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: .9rem; }
+  th, td { border: 1px solid var(--line); padding: 4px 8px; text-align: left; vertical-align: top; }
+  th { background: var(--bg-alt); font-weight: 600; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .state { display: inline-block; padding: 1px 8px; border-radius: 4px; font-weight: 700; font-size: .85rem; }
+  .SATISFIED { color: var(--ok); background: var(--ok-bg); }
+  .NOT_SATISFIED { color: var(--ko); background: var(--ko-bg); }
+  .INCONCLUSIVE { color: var(--inc); background: var(--inc-bg); }
+  .banner { border: 1px solid var(--line); border-left: 5px solid var(--inc); background: var(--inc-bg);
+            padding: 8px 12px; margin: 12px 0; }
+  .disclaimer { border-left-color: var(--muted); background: var(--bg-alt); }
+  .decision { border: 1px solid var(--line); padding: 12px 16px; margin: 16px 0; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; margin: 8px 0; }
+  dt { font-weight: 600; } dd { margin: 0; }
+  nav ol { columns: 2; font-size: .9rem; }
+  .not-provided { color: var(--muted); font-style: italic; }
+  @media print { nav { display: none; } h2 { break-after: avoid; } table { break-inside: avoid; } }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="muted">Version Verification Record · MedVision QA 0.0.1</p>
+  <h1>RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</h1>
+  <p class="muted">Run <code>91d8c022-704d-4cb1-9957-a73cdedbe68f</code> · 2026-10-31T06:14:30+00:00</p>
+  <div class="banner disclaimer">Technical evaluation document. It is not a clinical validation, a certification or proof of regulatory compliance. See section 21.</div>
+  <div class="decision">
+    <strong>Overall decision:</strong> <span class="state SATISFIED">SATISFIED</span> — all 3 criteria are satisfied
+    <div class="note">Aggregation rule: NOT_SATISFIED if at least one criterion is NOT_SATISFIED; otherwise INCONCLUSIVE if at least one criterion is INCONCLUSIVE; SATISFIED only if every criterion is SATISFIED.</div>
+  </div>
+</header>
+
+<nav><ol>
+<li><a href="#s1">Report and run identifiers</a></li><li><a href="#s2">Evaluation date and time</a></li><li><a href="#s3">Objective and description of the comparison</a></li><li><a href="#s4">Identifiers of the compared versions</a></li><li><a href="#s5">Code, commits, weights and hashes</a></li><li><a href="#s6">Dataset manifest</a></li><li><a href="#s7">File provenance</a></li><li><a href="#s8">Preprocessing, configuration, dependencies and seeds</a></li><li><a href="#s9">Classes and class order</a></li><li><a href="#s10">Data validation summary</a></li><li><a href="#s11">Metrics and definitions</a></li><li><a href="#s12">Confusion matrices</a></li><li><a href="#s13">Confidence intervals and parameters</a></li><li><a href="#s14">Statistical tests, assumptions and limits</a></li><li><a href="#s15">Acceptance criteria defined before the analysis</a></li><li><a href="#s16">State of each criterion and overall decision</a></li><li><a href="#s17">Sample size justification</a></li><li><a href="#s18">Robustness test results</a></li><li><a href="#s19">Items not available or not run</a></li><li><a href="#s20">Limitations of the analysis</a></li><li><a href="#s21">What This Report Cannot Establish</a></li></ol></nav>
+
+<h2 id="s1">1. Report and run identifiers</h2>
+<dl>
+  <dt>Run identifier</dt><dd><code>91d8c022-704d-4cb1-9957-a73cdedbe68f</code> (also identifies this report)</dd>
+  <dt>Configuration</dt><dd><code>config.toml</code> — SHA-256 <code>2fafeead7bdcf70fba24c92c2a4d1b16c32efcb636e06ec2f16bf06782445c21</code></dd>
+</dl>
+
+<h2 id="s2">2. Evaluation date and time</h2>
+<p>2026-10-31T06:14:30+00:00 (UTC, start of the run)</p>
+
+<h2 id="s3">3. Objective and description of the comparison</h2>
+<dl>
+  <dt>Title</dt><dd>RSNA lung opacity — Faster R-CNN ResNet-50 FPN at 512 px (A) vs 384 px (B)</dd>
+  <dt>Objective</dt><dd>Check, on the patient-disjoint test split, that reducing the input resolution from 512 to 384 px (about 1.4 times faster training in float32 on the GTX 1650) does not make the image-level detection of lung opacity worse: AUROC, sensitivity and specificity of B not inferior to A.</dd>
+  <dt>Type</dt><dd>Paired comparison: B (candidate) against A (reference), on the same 5349 cases</dd>
+</dl>
+
+<h2 id="s4">4. Identifiers of the compared versions</h2>
+<table>
+  <tr><th>Role</th><th>Identifier</th><th>Description</th><th>Scores provided</th></tr>
+  <tr><td>A — reference</td><td><code>frcnn-r50-fpn-512</code></td>
+      <td>torchvision fasterrcnn_resnet50_fpn, COCO_V1 weights, 2-class head, trainable_backbone_layers = 3. score_opacity = max box score mapped so that the validation-chosen threshold tau maps to 0.5 (PROTOCOL.md §7.4)</td><td>yes</td></tr>
+  <tr><td>B — candidate</td><td><code>frcnn-r50-fpn-384</code></td>
+      <td>Same model, recipe, seed and budget as A; only change: min_size = max_size = 384. Same score mapping with its own validation-chosen tau</td><td>yes</td></tr>
+</table>
+
+<h2 id="s5">5. Code, commits, weights and hashes</h2>
+<table>
+  <tr><th>Version</th><th>Code commit</th><th>Weights SHA-256</th></tr>
+  <tr><td>A</td><td class="mono">afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411</td><td class="mono">c549004887baad79659ca5a220a1931e49d1a051bda72f9cc561684c8c683c3b</td></tr>
+  <tr><td>B</td><td class="mono">afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411</td><td class="mono">462f1b293bbca8deda6489c8bd4c1a2cb663530f01e28238cf4ce809ab4cd4c2</td></tr>
+</table>
+<p class="note">Values declared in the configuration, not checked by the tool (weights are not read).</p>
+
+<h2 id="s6">6. Dataset manifest</h2>
+<dl>
+  <dt>Description</dt><dd>RSNA Pneumonia Detection Challenge (Kaggle, stage 2 train), 26,684 frontal chest radiographs from NIH ChestX-ray14. Test split = 5,349 images (1,207 with opacity) of 2,290 NIH patients, drawn by patient (seed 20261030); no patient shared with training or validation. Split: metadata/split.csv, SHA-256 9ec285f5399c198c1d0cd23f1e5b3a9e9b99cee3ab18bccd473115fd4cb7040c. manifest_sha256 = metadata/raw_manifest.csv (SHA-256 of every downloaded file).</dd>
+  <dt>Nature of the data</dt><dd>Real clinical data (declared by the user)</dd>
+  <dt>Manifest SHA-256</dt><dd class="mono">9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12af7</dd>
+</dl>
+
+<h2 id="s7">7. File provenance</h2>
+<table>
+  <tr><th>Role</th><th>File (relative to the configuration)</th><th>SHA-256 (computed)</th><th>Rows</th></tr>
+  <tr><td>Ground truth</td><td><code>medvision/ground_truth.csv</code></td><td class="mono">cd95773d0cf7b5a85424bc83a6a64d54f44e03eeeeb3dd0c1eb710b06fabf7c8</td><td class="num">5349</td></tr>
+  <tr><td>Predictions, version A</td><td><code>medvision/preds_r50_512.csv</code></td><td class="mono">1ddb8f5a7a8176d4106caa880541eeb3207d36691e13ff1c14b63b797c1cd0ad</td><td class="num">5349</td></tr>
+  <tr><td>Predictions, version B</td><td><code>medvision/preds_r50_384.csv</code></td><td class="mono">5971ea0b6318b68840d368687f58bfddcd4687229bde1898220b262ee2d17f47</td><td class="num">5349</td></tr>
+</table>
+<p class="note">Items not provided are summarised in section 19.</p>
+
+<h2 id="s8">8. Preprocessing, configuration, dependencies and seeds</h2>
+<table>
+  <tr><th>Version</th><th>Declared preprocessing</th></tr>
+<tr><td>A</td><td>DICOM (uint8, 1024 px) -&gt; 512 px PNG (PIL BOX, area average); [0, 1], repeated on 3 channels; ImageNet normalisation inside the model; fed at 512 px (no resize)</td></tr><tr><td>B</td><td>Same 512 px PNG; resized to 384 px inside the model (bilinear, torchvision GeneralizedRCNNTransform); boxes returned in 512 px coordinates</td></tr></table>
+<dl>
+  <dt>Seed</dt><dd>20261030</dd>
+  <dt>Score sum tolerance</dt><dd>0.001</dd>
+  <dt>Python</dt><dd>3.12.6</dd>
+  <dt>Dependencies</dt><dd><code>medvision-qa==0.0.1</code>, <code>numpy==2.5.4</code>, <code>scipy==1.18.1</code>, <code>scikit-learn==1.9.1</code>, <code>jinja2==3.1.6</code></dd>
+</dl>
+
+<h2 id="s9">9. Classes and class order</h2>
+<dl>
+  <dt>Declared order</dt><dd><code>0: no_opacity</code>, <code>1: opacity</code></dd>
+  <dt>Derived binary task</dt><dd>positive = opacity; negative = no_opacity</dd>
+</dl>
+
+<h2 id="s10">10. Data validation summary</h2>
+<p>Ground truth mode: <code>separate_file</code>. Strict alignment on case_id: 5349 cases, identical in every file. No row was removed, corrected or replaced.</p>
+<table>
+  <tr><th>File</th><th>Checks run (all passed)</th></tr>
+  <tr><td>Ground truth</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, patient_id_present</td></tr>
+  <tr><td>Predictions, version A</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, score_columns_complete, score_numeric, score_finite, score_in_bounds, score_sum_to_one(tol=0.001), predicted_is_argmax</td></tr>
+  <tr><td>Predictions, version B</td><td class="mono">encoding_utf8, csv_syntax, header_present, no_duplicate_columns, no_unknown_columns, required_columns, field_count, no_empty_lines, no_surrounding_whitespace, required_values_present, unique_case_id, labels_declared, score_columns_complete, score_numeric, score_finite, score_in_bounds, score_sum_to_one(tol=0.001), predicted_is_argmax</td></tr>
+</table>
+
+<h2 id="s11">11. Metrics and definitions</h2>
+<table>
+  <tr><th rowspan="2">Metric</th><th colspan="2">Version A</th><th colspan="2">Version B</th><th rowspan="2">Remarks</th></tr>
+  <tr><th>Estimate</th><th>95.0% CI</th><th>Estimate</th><th>95.0% CI</th></tr>
+  <tr><td><code>accuracy</code></td>
+<td class="num">0.8299</td><td class="num">[0.8159, 0.8434]</td><td class="num">0.8258</td><td class="num">[0.8122, 0.8396]</td>    <td class="note"></td></tr>
+  <tr><td><code>macro_f1</code></td>
+<td class="num">0.7664</td><td class="num">[0.7451, 0.7859]</td><td class="num">0.7662</td><td class="num">[0.7461, 0.7855]</td>    <td class="note"></td></tr>
+  <tr><td><code>precision[no_opacity]</code></td>
+<td class="num">0.9044</td><td class="num">[0.8919, 0.9163]</td><td class="num">0.9109</td><td class="num">[0.8993, 0.9222]</td>    <td class="note"></td></tr>
+  <tr><td><code>precision[opacity]</code></td>
+<td class="num">0.6098</td><td class="num">[0.5682, 0.6482]</td><td class="num">0.5953</td><td class="num">[0.5548, 0.6342]</td>    <td class="note"></td></tr>
+  <tr><td><code>recall[no_opacity]</code></td>
+<td class="num">0.8725</td><td class="num">[0.8567, 0.8887]</td><td class="num">0.8590</td><td class="num">[0.8422, 0.8754]</td>    <td class="note"></td></tr>
+  <tr><td><code>recall[opacity]</code></td>
+<td class="num">0.6835</td><td class="num">[0.6344, 0.7279]</td><td class="num">0.7117</td><td class="num">[0.6659, 0.7534]</td>    <td class="note"></td></tr>
+  <tr><td><code>f1[no_opacity]</code></td>
+<td class="num">0.8882</td><td class="num">[0.8773, 0.8989]</td><td class="num">0.8842</td><td class="num">[0.8733, 0.8949]</td>    <td class="note"></td></tr>
+  <tr><td><code>f1[opacity]</code></td>
+<td class="num">0.6445</td><td class="num">[0.6051, 0.6816]</td><td class="num">0.6483</td><td class="num">[0.6090, 0.6839]</td>    <td class="note"></td></tr>
+  <tr><td><code>sensitivity</code></td>
+<td class="num">0.6835</td><td class="num">[0.6344, 0.7279]</td><td class="num">0.7117</td><td class="num">[0.6659, 0.7534]</td>    <td class="note"></td></tr>
+  <tr><td><code>specificity</code></td>
+<td class="num">0.8725</td><td class="num">[0.8567, 0.8887]</td><td class="num">0.8590</td><td class="num">[0.8422, 0.8754]</td>    <td class="note"></td></tr>
+  <tr><td><code>auroc</code></td>
+<td class="num">0.8883</td><td class="num">[0.8746, 0.9018]</td><td class="num">0.8889</td><td class="num">[0.8748, 0.9024]</td>    <td class="note"></td></tr>
+</table>
+<h3>Definitions</h3>
+<dl><dt><code>accuracy</code></dt><dd>Proportion of cases where predicted_label = true_label.</dd><dt><code>precision</code></dt><dd>TP / (TP + FP) for the class, one-vs-rest. Undefined if the class is never predicted.</dd><dt><code>recall</code></dt><dd>TP / (TP + FN) for the class, one-vs-rest. Undefined if the class is absent from the ground truth.</dd><dt><code>f1</code></dt><dd>2·TP / (2·TP + FP + FN) for the class. Undefined if the class is absent from both the ground truth and the predictions.</dd><dt><code>macro_f1</code></dt><dd>Unweighted mean of the per-class F1 over all declared classes. Undefined if any F1 is undefined.</dd><dt><code>sensitivity</code></dt><dd>Derived binary task: TP / (TP + FN). Undefined without a declared positive class or without a positive case.</dd><dt><code>specificity</code></dt><dd>Derived binary task: TN / (TN + FP). Undefined without a declared positive class or without a negative case.</dd><dt><code>auroc</code></dt><dd>Derived binary task, positive score = sum of the positive classes&#39; scores; Mann-Whitney statistic, ties counted as 1/2. Undefined without scores, without a declared positive class, or if only one of the two binary classes is present.</dd></dl>
+
+<h2 id="s12">12. Confusion matrices</h2>
+<p class="note">Rows = ground truth, columns = prediction.</p>
+<h3>Version A</h3>
+<table>
+  <tr><th></th><th>no_opacity</th><th>opacity</th></tr>
+<tr><th>no_opacity</th><td class="num">3614</td><td class="num">528</td></tr><tr><th>opacity</th><td class="num">382</td><td class="num">825</td></tr></table>
+<h3>Version B</h3>
+<table>
+  <tr><th></th><th>no_opacity</th><th>opacity</th></tr>
+<tr><th>no_opacity</th><td class="num">3558</td><td class="num">584</td></tr><tr><th>opacity</th><td class="num">348</td><td class="num">859</td></tr></table>
+
+<h2 id="s13">13. Confidence intervals and parameters</h2>
+<dl>
+  <dt>Method</dt><dd>percentile bootstrap, two-sided, linear quantiles</dd>
+  <dt>Level</dt><dd>0.95</dd>
+  <dt>Resamples</dt><dd>2000</dd>
+  <dt>Seed</dt><dd>20261030</dd>
+  <dt>Resampling unit</dt><dd>patient (2290 units)</dd>
+</dl>
+<p class="note">An interval is produced only if the metric is defined on the full sample and in every resample.</p>
+
+<h2 id="s14">14. Statistical tests, assumptions and limits</h2>
+<h3>Paired differences Δ = B − A (paired bootstrap, same draws for A and B)</h3>
+<table>
+  <tr><th>Metric</th><th>Δ</th><th>CI</th><th>Remarks</th></tr>
+  <tr><td><code>accuracy</code></td><td class="num">-0.0041</td><td class="num">[-0.0107, 0.0031]</td><td class="note"></td></tr>
+  <tr><td><code>macro_f1</code></td><td class="num">-0.0001</td><td class="num">[-0.0091, 0.0101]</td><td class="note"></td></tr>
+  <tr><td><code>precision[no_opacity]</code></td><td class="num">0.0065</td><td class="num">[0.0010, 0.0128]</td><td class="note"></td></tr>
+  <tr><td><code>precision[opacity]</code></td><td class="num">-0.0145</td><td class="num">[-0.0277, -0.0003]</td><td class="note"></td></tr>
+  <tr><td><code>recall[no_opacity]</code></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td class="note"></td></tr>
+  <tr><td><code>recall[opacity]</code></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td class="note"></td></tr>
+  <tr><td><code>f1[no_opacity]</code></td><td class="num">-0.0040</td><td class="num">[-0.0085, 0.0009]</td><td class="note"></td></tr>
+  <tr><td><code>f1[opacity]</code></td><td class="num">0.0038</td><td class="num">[-0.0102, 0.0198]</td><td class="note"></td></tr>
+  <tr><td><code>sensitivity</code></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td class="note"></td></tr>
+  <tr><td><code>specificity</code></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td class="note"></td></tr>
+  <tr><td><code>auroc</code></td><td class="num">0.0006</td><td class="num">[-0.0027, 0.0038]</td><td class="note"></td></tr>
+</table>
+<h3>McNemar (informative, not used in decisions)</h3>
+<dl>
+  <dt>Method</dt><dd>Exact conditional McNemar (two-sided binomial on discordant pairs)</dd>
+  <dt>Pairs</dt><dd>both correct: 4270 · only A correct: 169 · only B correct: 147 · both wrong: 763</dd>
+  <dt>p-value</dt><dd>not applicable — several cases per patient: the pairs are not independent, so the McNemar test assumption does not hold</dd>
+</dl>
+<p class="note">Assumption: independent pairs. A high p-value proves neither equivalence nor the absence of regression, and a low p-value does not measure the practical or clinical importance of the difference.</p>
+<h3>DeLong</h3>
+<p>not implemented: no independent reference (R/pROC) available to validate it; the AUROC difference is estimated by paired bootstrap</p>
+
+<h2 id="s15">15. Acceptance criteria defined before the analysis</h2>
+<table>
+  <tr><th>Id</th><th>Description</th><th>Type</th><th>Quantity</th><th>Parameter</th></tr>
+  <tr><td>C1</td><td>Image-level AUROC (opacity vs none) of B not inferior to A, margin 0.02</td><td><code>non_inferiority</code></td><td><code>auroc (B − A)</code></td><td>margin 0.0200</td></tr>
+  <tr><td>C2</td><td>Image-level sensitivity of B at its tau not inferior to A at its tau, margin 0.05</td><td><code>non_inferiority</code></td><td><code>sensitivity (B − A)</code></td><td>margin 0.0500</td></tr>
+  <tr><td>C3</td><td>Image-level specificity of B at its tau not inferior to A at its tau, margin 0.05</td><td><code>non_inferiority</code></td><td><code>specificity (B − A)</code></td><td>margin 0.0500</td></tr>
+</table>
+<p class="note">The tool cannot prove the criteria were fixed before the analysis: compare the configuration hash with its version history (e.g. git). Configuration SHA-256: <code>2fafeead7bdcf70fba24c92c2a4d1b16c32efcb636e06ec2f16bf06782445c21</code></p>
+
+<h2 id="s16">16. State of each criterion and overall decision</h2>
+<table>
+  <tr><th>Id</th><th>State</th><th>Estimate</th><th>CI</th><th>Justification</th></tr>
+  <tr><td>C1</td><td><span class="state SATISFIED">SATISFIED</span></td><td class="num">0.0006</td><td class="num">[-0.0027, 0.0038]</td><td>CI [-0.0027, 0.0038]: lower bound &gt; −margin (-0.0200)</td></tr>
+  <tr><td>C2</td><td><span class="state SATISFIED">SATISFIED</span></td><td class="num">0.0282</td><td class="num">[0.0084, 0.0512]</td><td>CI [0.0084, 0.0512]: lower bound &gt; −margin (-0.0500)</td></tr>
+  <tr><td>C3</td><td><span class="state SATISFIED">SATISFIED</span></td><td class="num">-0.0135</td><td class="num">[-0.0202, -0.0068]</td><td>CI [-0.0202, -0.0068]: lower bound &gt; −margin (-0.0500)</td></tr>
+</table>
+<p><strong>Overall decision:</strong> <span class="state SATISFIED">SATISFIED</span> — all 3 criteria are satisfied</p>
+<p class="note">NOT_SATISFIED if at least one criterion is NOT_SATISFIED; otherwise INCONCLUSIVE if at least one criterion is INCONCLUSIVE; SATISFIED only if every criterion is SATISFIED. A criterion is INCONCLUSIVE if the interval is undefined or has zero width.</p>
+
+<h2 id="s17">17. Sample size justification</h2>
+<dl>
+  <dt>Actual size</dt><dd>5349 cases, 2290 patients</dd>
+  <dt>Justification</dt><dd>Based on data availability</dd>
+<dt>Text provided</dt><dd>Size set by the public dataset and the 70/10/20 patient-level split fixed in Step 2 (commit abfc675). No power calculation was done.</dd></dl>
+<div class="banner">A sample size dictated by data availability is not a statistical justification.</div>
+<h2 id="s18">18. Robustness test results</h2>
+<p>Not run: this version of the tool does not include robustness tests.</p>
+
+<h2 id="s19">19. Items not available or not run</h2>
+<ul><li>McNemar test: not applicable (several cases per patient: the pairs are not independent, so the McNemar test assumption does not hold)</li><li>DeLong test: not implemented: no independent reference (R/pROC) available to validate it; the AUROC difference is estimated by paired bootstrap</li><li>Robustness tests: not run (not supported by this version of the tool)</li></ul>
+
+<h2 id="s20">20. Limitations of the analysis</h2>
+<ul><li>Percentile bootstrap: actual coverage may fall below the nominal level for small samples and for metrics close to 0 or 1.</li><li>3 criteria evaluated without multiplicity correction.</li><li>The tool cannot prove the criteria were defined before the analysis; the configuration hash lets you check this against an external history (git).</li><li>Alignment checks that case identifiers are consistent, not that they refer to the same images for every version.</li><li>Metrics are computed on the multiclass decision (argmax); no alternative decision threshold is evaluated.</li></ul>
+
+<h2 id="s21">21. What This Report Cannot Establish</h2>
+<ul><li>A non-significant result does not prove the absence of regression, equivalence or non-inferiority.</li><li>This analysis is not a clinical validation, nor a demonstration of clinical safety.</li><li>This report does not certify compliance with ISO 13485, the FDA QMSR or any other regulation.</li><li>Synthetic sensitivity tests do not validate real clinical acquisition conditions.</li><li>Near-duplicate detection alone does not prove data leakage or patient identity.</li><li>The conclusions are limited to the data, protocol, assumptions and methods actually used.</li></ul>
+
+<footer class="note"><p>Generated by MedVision QA 0.0.1. Self-contained report: no external resource, no script.</p></footer>
+</body>
+</html>

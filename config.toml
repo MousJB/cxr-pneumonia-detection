@@ -25,16 +25,16 @@ manifest_sha256 = "9484bad013e24091845ac15072cc6e9ce7bb4ecc9b22c83f59b0259883b12
 [versions.A]
 id = "frcnn-r50-fpn-512"
 predictions_file = "medvision/preds_r50_512.csv"
-code_commit = ""        # filled in after training
-weights_sha256 = ""     # filled in after training
+code_commit = "afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411"
+weights_sha256 = "c549004887baad79659ca5a220a1931e49d1a051bda72f9cc561684c8c683c3b"
 preprocessing = "DICOM (uint8, 1024 px) -> 512 px PNG (PIL BOX, area average); [0, 1], repeated on 3 channels; ImageNet normalisation inside the model; fed at 512 px (no resize)"
 description = "torchvision fasterrcnn_resnet50_fpn, COCO_V1 weights, 2-class head, trainable_backbone_layers = 3. score_opacity = max box score mapped so that the validation-chosen threshold tau maps to 0.5 (PROTOCOL.md §7.4)"
 
 [versions.B]
 id = "frcnn-r50-fpn-384"
 predictions_file = "medvision/preds_r50_384.csv"
-code_commit = ""
-weights_sha256 = ""
+code_commit = "afe4b6d1e44ee5d9e571c6aaebcbfdd6b3835411"
+weights_sha256 = "462f1b293bbca8deda6489c8bd4c1a2cb663530f01e28238cf4ce809ab4cd4c2"
 preprocessing = "Same 512 px PNG; resized to 384 px inside the model (bilinear, torchvision GeneralizedRCNNTransform); boxes returned in 512 px coordinates"
 description = "Same model, recipe, seed and budget as A; only change: min_size = max_size = 384. Same score mapping with its own validation-chosen tau"
 
